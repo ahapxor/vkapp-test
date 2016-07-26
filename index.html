@@ -5,8 +5,8 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <script type="text/javascript" src="//vk.com/js/api/xd_connection.js?2"></script>
-  <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
-
+  <script type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js" integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
   <title></title>
   <script type='text/javascript'>//<![CDATA[
     window.onload=function(){
@@ -16,29 +16,56 @@
         });
       };
 
-
 //      VK.callMethod("showSettingsBox", 4096);
 
-    }//]]> 
+    };
 
-</script>
+  function drawTable(data) {
+      for (var i = 0; i < data.length; i++) {
+          drawRow(data[i]);
+      }
+  }
+
+  function drawRow(rowData) {
+      var row = $("<tr />");
+      $("#personDataTable").append(row);
+      row.append($("<td>" + rowData.id + "</td>"));
+      row.append($("<td>" + rowData.text + "</td>"));
+      row.append($("<td>" + rowData.comments.count + "</td>"));
+  }
+  //]]></script>
 </head>
 
 <body>
   <pre> <div id="vk-api-transport"></div></pre>
+  <table id="personDataTable">
+      <tr>
+          <th>Id</th>
+          <th>Text</th>
+          <th>Comments count</th>
+      </tr>
+
+  </table>
   <script type='text/javascript'>//<![CDATA[
-      VK.api('users.get', {user_ids: 9396077, fields: 'bdate'}, function(r) {
-        if(r.response){
-          var div = document.getElementById('vk-api-transport');
-          div.innerHTML = div.innerHTML + r.response;
-        }
-      });
-      VK.api('groups.get', {filter: 'admin'});
+//      VK.api('users.get', {user_ids: 9396077, fields: 'bdate'}, function(r) {
+//        if(r.response){
+//          var div = document.getElementById('vk-api-transport');
+//          div.innerHTML = div.innerHTML + r.response;
+//        }
+//      });
+//      VK.api('groups.get', {filter: 'admin'});
+    VK.api('wall.get',
+            {
+                domain: 'sevanimals',
+                offset: 1,
+                count: 25
+            },
+            function(r) {
+                r.shift();
+                drawTable(r);
+            });
   //]]></script>
-
-
 </body>
-
 </html>
 
 
