@@ -8,6 +8,12 @@
   <script type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js" integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
   <title></title>
+  <style>
+      .content {
+          overflow:auto;
+          height: 700px;
+      }
+  </style>
   <script type='text/javascript'>//<![CDATA[
     window.onload=function(){
       window.vkAsyncInit = function() {
@@ -38,7 +44,7 @@
 
 <body>
   <!--<pre> <div id="vk-api-transport"></div></pre>-->
-  <div style="overflow:auto;"><table id="personDataTable">
+  <div class="content"><table id="personDataTable">
       <tr>
           <th>Id</th>
           <th>Text</th>
