@@ -29,23 +29,23 @@
   function drawRow(rowData) {
       var row = $("<tr />");
       $("#personDataTable").append(row);
-      row.append($("<td>" + rowData.id + "</td>"));
-      row.append($("<td>" + rowData.text + "</td>"));
-      row.append($("<td>" + rowData.comments.count + "</td>"));
+      row.append($('<td>' + rowData.id + '</td>'));
+      row.append($('<td>' + rowData.text + '</td>'));
+      row.append($('<td>' + rowData.comments.count + '</td>'));
   }
   //]]></script>
 </head>
 
 <body>
-  <pre> <div id="vk-api-transport"></div></pre>
-  <table id="personDataTable">
+  <!--<pre> <div id="vk-api-transport"></div></pre>-->
+  <div style="overflow:auto;"><table id="personDataTable">
       <tr>
           <th>Id</th>
           <th>Text</th>
           <th>Comments count</th>
       </tr>
 
-  </table>
+  </table></div>
   <script type='text/javascript'>//<![CDATA[
 //      VK.api('users.get', {user_ids: 9396077, fields: 'bdate'}, function(r) {
 //        if(r.response){
