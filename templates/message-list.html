@@ -1,0 +1,14 @@
+<div class="content">
+    <table id="messagesDataTable">
+        <tr>
+            <th>Id</th>
+            <th>Text</th>
+            <th>Comments count</th>
+        </tr>
+        <tr ng-repeat="message in messages">
+            <td>{{message.id}}</td>
+            <td>{{message.text}}</td>
+            <td>{{message.comments.count}}</td>
+        </tr>
+    </table>
+</div>
