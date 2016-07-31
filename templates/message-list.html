@@ -1,12 +1,12 @@
 <div class="content">
     <table id="messagesDataTable">
         <tr>
-            <th>Id</th>
+            <th></th>
             <th>Text</th>
             <th>Comments count</th>
         </tr>
         <tr ng-repeat="message in messages">
-            <td>{{message.id}}</td>
+            <td><input type="checkbox" ng-model="message.checked"></td>
             <td>{{message.text}}</td>
             <td>{{message.comments.count}}</td>
         </tr>

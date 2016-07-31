@@ -4,10 +4,10 @@ app.config(function($routeProvider) {
     $routeProvider
 
     // route for the home page
-        .when('/', {
-            templateUrl : 'templates/message-list.html',
-            controller  : 'app.messageListController'
-        })
+    //    .when('/', {
+    //        templateUrl : 'templates/message-list.html',
+    //        controller  : 'app.messageListController'
+    //    })
 
         // route for the about page
         //.when('/configs', {
