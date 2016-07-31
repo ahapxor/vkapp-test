@@ -28,7 +28,7 @@ app.config(function($routeProvider) {
         });
 });
 
-app.factory('vkSevanService', function() {
+app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
@@ -39,7 +39,7 @@ app.factory('vkSevanService', function() {
         },
 
         getMessagesList: function(offset, count) {
-            var def = $.Defered();
+            var def = $q.defer();
 
             VK.api('wall.get', {
                     domain: 'sevanimals',
@@ -52,7 +52,7 @@ app.factory('vkSevanService', function() {
                     def.resolve(resp);
                 });
 
-            return def.promise();
+            return def.promise;
         }
     };
     vk.init();
