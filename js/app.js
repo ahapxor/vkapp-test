@@ -65,7 +65,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.messages = [];
 
         vkSevanService
-            .getMessagesList(1, 25)
+            .getMessagesList(0, 25)
             .then(function(resp) {
                 $scope.messages = resp;
             });
