@@ -42,7 +42,8 @@ app.factory('vkSevanService', function($q) {
             var def = $q.defer();
 
             VK.api('wall.get', {
-                    domain: 'sevanimals',
+                    owner_id: -125683505,
+                    //domain: 'sevanimals',
                     offset: offset,
                     count: count
                 },
