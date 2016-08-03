@@ -73,7 +73,6 @@ app.factory('vkSevanService', function($q) {
                 },
                 function (r) {
                     var resp = r.response;
-                    resp.shift();
                     def.resolve(resp);
                 });
 
