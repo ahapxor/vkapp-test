@@ -8,7 +8,7 @@
         <tr ng-repeat="message in messages">
             <td><input type="checkbox" ng-model="message.checked"></td>
             <td>{{message.text}}</td>
-            <td ng-repeat="attach in attachments">
+            <td ng-repeat="attach in message.attachments">
                 <img ng-src="{{attach.photo.src_small}}" />
             </td>
             <td>{{message.comments.count}}</td>
