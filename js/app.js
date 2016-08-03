@@ -32,6 +32,7 @@ app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
+        groupId: -125683505,
         //appPermissions: 16,
 
         init: function () {
@@ -42,10 +43,33 @@ app.factory('vkSevanService', function($q) {
             var def = $q.defer();
 
             VK.api('wall.get', {
-                    owner_id: -125683505,
-                    //domain: 'sevanimals',
+                    owner_id: this.groupId,
                     offset: offset,
                     count: count
+                },
+                function (r) {
+                    var resp = r.response;
+                    resp.shift();
+                    def.resolve(resp);
+                });
+
+            return def.promise;
+        },
+
+        postMessage: function(message, attachments) {
+            var def = $q.defer();
+            var attachList = !attachments ?
+                null :
+                attachments
+                    .map(function(attach) {
+                        return attach.type + attach.photo.owner_id + "_" + attach.photo.pid
+                    }).join();
+
+            VK.api('wall.post', {
+                    owner_id: this.groupId,
+                    from_group: 1,
+                    message: message,
+                    attachments: attachList
                 },
                 function (r) {
                     var resp = r.response;
@@ -69,4 +93,8 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
             .then(function(resp) {
                 $scope.messages = resp;
             });
+
+        $scope.repostMessage = function (message) {
+
+        }
 }]);
