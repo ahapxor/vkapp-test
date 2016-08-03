@@ -95,6 +95,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
             });
 
         $scope.repostMessage = function (message) {
-
+            vkSevanService
+                .postMessage(message.text, message.attachments)
         }
 }]);
