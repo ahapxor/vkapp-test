@@ -62,7 +62,8 @@ app.factory('vkSevanService', function($q) {
                 null :
                 attachments
                     .map(function(attach) {
-                        return attach.type + attach.photo.owner_id + "_" + attach.photo.pid
+                        var attachType = attach.type;
+                        return attachType + attach[attachType].owner_id + "_" + attach[attachType].pid
                     }).join();
 
             VK.api('wall.post', {
