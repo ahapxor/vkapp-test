@@ -32,7 +32,8 @@ app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
-        groupId: -125683505,
+        //groupId: -125683505,
+        groupId: -18923086,
         //appPermissions: 16,
 
         init: function () {
@@ -44,6 +45,7 @@ app.factory('vkSevanService', function($q) {
 
             VK.api('wall.get', {
                     owner_id: this.groupId,
+                    filter: "suggests",
                     offset: offset,
                     count: count
                 },
@@ -63,7 +65,8 @@ app.factory('vkSevanService', function($q) {
                 attachments
                     .map(function(attach) {
                         var attachType = attach.type;
-                        return attachType + attach[attachType].owner_id + "_" + attach[attachType].pid
+                        var attachment = attach[attachType];
+                        return attachType + attachment.owner_id + "_" + (!!attachment.pid ? attachment.pid : attachment.vid)
                     }).join();
 
             VK.api('wall.post', {
