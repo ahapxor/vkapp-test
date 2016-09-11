@@ -66,7 +66,7 @@ app.factory('vkSevanService', function($q) {
         postMessage: function(message, attachments) {
             var def = $q.defer();
             var attachList = !attachments ?
-                "photo-125683505_427831693" :
+                "photo" :
                 attachments
                     .map(function(attach) {
                         var attachType = attach.type;
