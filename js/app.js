@@ -45,7 +45,7 @@ app.factory('vkSevanService', function($q) {
 
             VK.api('wall.get', {
                     owner_id: this.groupId,
-                    filter: "suggests",
+                    filter: "others",
                     offset: offset,
                     count: count
                 },
