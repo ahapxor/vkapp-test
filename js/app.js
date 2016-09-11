@@ -42,7 +42,7 @@ app.factory('vkSevanService', function($q) {
         accessToken: getQueryStringValue('access_token'),
 
         init: function () {
-            VK.init({apiId: vk.appID});
+            VK.init({apiId: vk.appID, access_token: this.accessToken});
         },
 
         getMessagesList: function(offset, count) {
@@ -51,7 +51,6 @@ app.factory('vkSevanService', function($q) {
             VK.api('wall.get', {
                     owner_id: this.groupId,
                     filter: "others",
-                    access_token: this.accessToken,
                     offset: offset,
                     count: count
                 },
