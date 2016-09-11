@@ -39,10 +39,10 @@ app.factory('vkSevanService', function($q) {
         appID: 5561099,
         groupId: -125683505,
         //groupId: -18923086,
-        accessToken: getQueryStringValue('access_token'),
 
         init: function () {
-            VK.init({apiId: vk.appID, access_token: this.accessToken});
+            VK.init({apiId: vk.appID});
+            VK.callMethod('showSettingsBox', 16);
         },
 
         getMessagesList: function(offset, count) {
@@ -78,8 +78,7 @@ app.factory('vkSevanService', function($q) {
                     owner_id: this.groupId,
                     from_group: 1,
                     message: message,
-                    attachments: attachList,
-                    access_token: this.accessToken
+                    attachments: attachList
                 },
                 function (r) {
                     var resp = r.response;
