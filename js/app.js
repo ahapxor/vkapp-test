@@ -34,7 +34,7 @@ app.factory('vkSevanService', function($q) {
         appID: 5561099,
         groupId: -125683505,
         //groupId: -18923086,
-        //appPermissions: 16,
+        appPermissions: 16,
 
         init: function () {
             VK.init({apiId: vk.appID});
