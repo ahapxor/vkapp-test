@@ -28,13 +28,13 @@ app.config(function($routeProvider) {
         });
 });
 
-app.factory('vkSevanService', function($q) {
+app.factory('vkSevanService', function($q, $location) {
     var vk = {
         data: {},
         appID: 5561099,
         groupId: -125683505,
         //groupId: -18923086,
-        appPermissions: 4096,
+        accessToken: ($location.search())['access_token'],
 
         init: function () {
             VK.init({apiId: vk.appID});
