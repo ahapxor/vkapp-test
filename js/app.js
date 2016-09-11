@@ -79,7 +79,8 @@ app.factory('vkSevanService', function($q) {
                     owner_id: this.groupId,
                     from_group: 1,
                     message: message,
-                    attachments: attachList
+                    attachments: attachList,
+                    access_token: this.accessToken
                 },
                 function (r) {
                     var resp = r.response;
