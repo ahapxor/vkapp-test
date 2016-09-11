@@ -42,7 +42,7 @@ app.factory('vkSevanService', function($q) {
 
         init: function () {
             VK.init({apiId: vk.appID});
-            VK.callMethod('showSettingsBox', 0);
+            //VK.callMethod('showSettingsBox', 0);
         },
 
         getMessagesList: function(offset, count) {
