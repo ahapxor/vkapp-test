@@ -1,3 +1,8 @@
+function getQueryStringValue (key) {
+    return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]"
+        + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
+
 var app = angular.module('app', ['ngRoute']);
 
 app.config(function($routeProvider) {
@@ -28,13 +33,13 @@ app.config(function($routeProvider) {
         });
 });
 
-app.factory('vkSevanService', function($q, $routeParams) {
+app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
         groupId: -125683505,
         //groupId: -18923086,
-        accessToken: $routeParams['access_token'],
+        accessToken: getQueryStringValue('access_token'),
 
         init: function () {
             VK.init({apiId: vk.appID});
