@@ -51,6 +51,7 @@ app.factory('vkSevanService', function($q) {
             VK.api('wall.get', {
                     owner_id: this.groupId,
                     filter: "others",
+                    access_token: this.accessToken,
                     offset: offset,
                     count: count
                 },
