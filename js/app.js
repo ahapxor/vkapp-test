@@ -116,8 +116,29 @@ app.factory('vkSevanService', function($q) {
     return vk;
 });
 
-app.controller('app.messageListController', ['$scope', 'vkSevanService',
+app.controller('app.baseRepostController', ['$scope', 'vkSevanService',
     function ($scope, vkSevanService) {
+        $scope.repostMessage = function (message) {
+            vkSevanService
+                .postMessage(message.text, message.attachments)
+        };
+
+        $scope.getAttachPreview = function (attach) {
+            if(!!attach.photo) {
+                return attach.photo.src_small;
+            } else if(!!attach.video) {
+                return attach.video.image_small;
+            } else {
+                return null;
+            }
+
+        };
+}]);
+
+app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
+    function ($scope, $controller, vkSevanService) {
+        $controller('app.baseCrudController', { $scope: $scope });
+
         $scope.messages = [];
         $scope.groups = [];
         $scope.profiles = [];
@@ -143,29 +164,15 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
 
         $scope.getNextPage = getNextPage;
 
-        $scope.repostMessage = function (message) {
-            vkSevanService
-                .postMessage(message.text, message.attachments)
-        };
-
-        $scope.getAttachPreview = function (attach) {
-            if(!!attach.photo) {
-                return attach.photo.src_small;
-            } else if(!!attach.video) {
-                return attach.video.image_small;
-            } else {
-                return null;
-            }
-
-        };
-
         $scope.getOwnerName = function(post) {
             return null;
         }
 }]);
 
-app.controller('app.onePostController', ['$scope', 'vkSevanService',
-    function ($scope, vkSevanService) {
+app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanService',
+    function ($scope, $controller, vkSevanService) {
+        $controller('app.baseCrudController', { $scope: $scope });
+
         $scope.postLink = "";
         $scope.parsedId = "";
         $scope.message = {};
@@ -186,24 +193,6 @@ app.controller('app.onePostController', ['$scope', 'vkSevanService',
                 .then(function (resp) {
                     $scope.message = resp;
                 });
-        };
-
-        //todo: duplicate
-        $scope.getAttachPreview = function (attach) {
-            if(!!attach.photo) {
-                return attach.photo.src_small;
-            } else if(!!attach.video) {
-                return attach.video.image_small;
-            } else {
-                return null;
-            }
-
-        };
-
-        //todo: duplicate
-        $scope.repostMessage = function (message) {
-            vkSevanService
-                .postMessage(message.text, message.attachments)
         };
     }]);
 
