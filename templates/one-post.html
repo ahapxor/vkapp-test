@@ -1,3 +1,6 @@
 <div class="content">
-one-post
+
+    <label for="in-post">Ссылка на пост</label>
+    <input id="in-post" type="text" ng-model="postLink" ng-change="parseId()">
+    <div id="parsed-id">{{parsedId}}</div>
 </div>

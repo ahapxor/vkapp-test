@@ -150,7 +150,13 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
 
 app.controller('app.onePostController', ['$scope', 'vkSevanService',
     function ($scope, vkSevanService) {
-        $scope.messages = [];
+        $scope.postLink = "";
+        $scope.parsedId = "";
+        var parseRegex = /wall(-[0-9]+_[0-9]+)/;
+
+        $scope.parseId = function() {
+            $scope.parsedId = parseRegex.exec($scope.postLink)[1];
+        }
 }]);
 
 app.controller('app.searchController', ['$scope', 'vkSevanService',
