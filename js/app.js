@@ -59,7 +59,6 @@ app.factory('vkSevanService', function($q) {
             VK.api('wall.get', query,
                 function (r) {
                     var resp = r.response;
-                    resp.shift();
                     def.resolve(resp);
                 });
 
@@ -103,11 +102,16 @@ app.factory('vkSevanService', function($q) {
 app.controller('app.messageListController', ['$scope', 'vkSevanService',
     function ($scope, vkSevanService) {
         $scope.messages = [];
+        $scope.groups = [];
+        $scope.profiles = [];
 
         vkSevanService
             .getMessagesList(0, 25)
             .then(function(resp) {
-                $scope.messages = resp;
+                $scope.groups = resp.groups;
+                $scope.profiles = resp.profiles;
+                $scope.messages = resp.wall;
+                $scope.messages.shift();
             });
 
         $scope.repostMessage = function (message) {
