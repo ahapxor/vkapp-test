@@ -105,6 +105,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.messages = [];
         $scope.groups = [];
         $scope.profiles = [];
+        $scope.pageSize = 2;
         $scope.isListFull = false;
 
         getNextPage();
@@ -113,7 +114,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         function getNextPage() {
             console.log("getNextPage");
             vkSevanService
-                .getMessagesList($scope.messages.length, $scope.count)
+                .getMessagesList($scope.messages.length, $scope.pageSize)
                 .then(function (resp) {
                     $scope.groups = $scope.groups.concat(resp.groups);
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
