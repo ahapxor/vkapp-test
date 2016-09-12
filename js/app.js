@@ -37,7 +37,8 @@ app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
-        groupId: -125683505,
+        groupId: -18923086,
+        toGroupId: -125683505,
         //groupId: -18923086,
 
         init: function () {
@@ -75,7 +76,7 @@ app.factory('vkSevanService', function($q) {
         postMessage: function(message, attachments) {
             var def = $q.defer();
             var requestParams = {
-                owner_id: this.groupId,
+                owner_id: this.toGroupId,
                 from_group: 1,
                 message: message
             };
