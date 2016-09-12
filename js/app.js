@@ -111,5 +111,16 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.repostMessage = function (message) {
             vkSevanService
                 .postMessage(message.text, message.attachments)
-        }
+        };
+
+        $scope.getAttachPreview = function (attach) {
+            if(!!attach.photo) {
+                return attach.photo.src_small;
+            } else if(!!attach.video) {
+                return attach.video.image_small;
+            } else {
+                return null;
+            }
+
+        };
 }]);

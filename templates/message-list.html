@@ -8,7 +8,7 @@
             <td><a href="" ng-click="repostMessage(message)">Repost</a></td>
             <td>{{message.text}}</td>
             <td ng-repeat="attach in message.attachments">
-                <img ng-src="{{attach.photo.src_small}}" />
+                <img ng-src="{{getAttachPreview(attach)}}" />
             </td>
         </tr>
     </table>
