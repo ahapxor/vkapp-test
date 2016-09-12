@@ -5,7 +5,7 @@
             <th>Text</th>
         </tr>
         <tr ng-repeat="message in messages">
-            <td><a href="" ng-click="repostMessage(message)">Repost</a></td>
+            <td><button ng-click="repostMessage(message)">Repost</button></td>
             <td>{{message.text}}</td>
             <td ng-repeat="attach in message.attachments">
                 <img ng-src="{{getAttachPreview(attach)}}" />
