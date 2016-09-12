@@ -200,6 +200,11 @@ app.controller('app.onePostController', ['$scope', 'vkSevanService',
 
         };
 
+        //todo: duplicate
+        $scope.repostMessage = function (message) {
+            vkSevanService
+                .postMessage(message.text, message.attachments)
+        };
     }]);
 
 app.controller('app.searchController', ['$scope', 'vkSevanService',
