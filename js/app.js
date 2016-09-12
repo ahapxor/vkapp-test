@@ -63,23 +63,28 @@ app.factory('vkSevanService', function($q) {
             return def.promise;
         },
 
+        getAttachmentsInString: function (attachments) {
+            return attachments
+                .map(function (attach) {
+                    var attachType = attach.type;
+                    var attachment = attach[attachType];
+                    return attachType + attachment.owner_id + "_" + (!!attachment.pid ? attachment.pid : attachment.vid)
+                }).join();
+        },
+
         postMessage: function(message, attachments) {
             var def = $q.defer();
-            var attachList = !attachments ?
-                "photo" :
-                attachments
-                    .map(function(attach) {
-                        var attachType = attach.type;
-                        var attachment = attach[attachType];
-                        return attachType + attachment.owner_id + "_" + (!!attachment.pid ? attachment.pid : attachment.vid)
-                    }).join();
+            var requestParams = {
+                owner_id: this.groupId,
+                from_group: 1,
+                message: message
+            };
 
-            VK.api('wall.post', {
-                    owner_id: this.groupId,
-                    from_group: 1,
-                    message: message,
-                    attachments: attachList
-                },
+            if(!!attachments) {
+                requestParams.attachments = this.getAttachmentsInString(attachments);
+            }
+
+            VK.api('wall.post', requestParams,
                 function (r) {
                     var resp = r.response;
                     def.resolve(resp);
