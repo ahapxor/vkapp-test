@@ -66,6 +66,22 @@ app.factory('vkSevanService', function($q) {
             return def.promise;
         },
 
+        getMessagesById: function(id) {
+            console.log("service getMessagesById");
+            var def = $q.defer();
+
+            var query = {
+                posts: id
+            };
+            VK.api('wall.getById', query,
+                function (r) {
+                    var resp = r.response[0];
+                    def.resolve(resp);
+                });
+
+            return def.promise;
+        },
+
         getAttachmentsInString: function (attachments) {
             return attachments
                 .map(function (attach) {
@@ -152,13 +168,39 @@ app.controller('app.onePostController', ['$scope', 'vkSevanService',
     function ($scope, vkSevanService) {
         $scope.postLink = "";
         $scope.parsedId = "";
+        $scope.message = {};
         var parseRegex = /wall(-[0-9]+_[0-9]+)/;
 
-        $scope.parseId = function() {
-            var matches = parseRegex.exec($scope.postLink);
-            $scope.parsedId = !!matches && matches.length > 1 ? matches[1] : "";
+        function parseId(link) {
+            var matches = parseRegex.exec(link);
+            return !!matches && matches.length > 1 ? matches[1] : "";
         }
-}]);
+
+        $scope.reloadMessage = function() {
+            var id = parseId($scope.postLink);
+            if(id.length == 0) {
+                return;
+            }
+            vkSevanService
+                .getMessagesById(id)
+                .then(function (resp) {
+                    $scope.message = resp;
+                });
+        };
+
+        //todo: duplicate
+        $scope.getAttachPreview = function (attach) {
+            if(!!attach.photo) {
+                return attach.photo.src_small;
+            } else if(!!attach.video) {
+                return attach.video.image_small;
+            } else {
+                return null;
+            }
+
+        };
+
+    }]);
 
 app.controller('app.searchController', ['$scope', 'vkSevanService',
     function ($scope, vkSevanService) {

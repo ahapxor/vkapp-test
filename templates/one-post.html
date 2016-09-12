@@ -2,5 +2,17 @@
 
     <label for="in-post">Ссылка на пост</label>
     <input id="in-post" type="text" ng-model="postLink" ng-change="parseId()">
-    <div id="parsed-id">{{parsedId}}</div>
+    <table id="messagesDataTable" border="1">
+        <tr>
+            <th></th>
+            <th>Text</th>
+        </tr>
+        <tr>
+            <td><button ng-click="repostMessage(message)">Repost</button></td>
+            <td>{{message.text}}</td>
+            <td ng-repeat="attach in message.attachments">
+                <img ng-src="{{getAttachPreview(attach)}}" />
+            </td>
+        </tr>
+    </table>
 </div>
