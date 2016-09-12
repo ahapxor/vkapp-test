@@ -105,7 +105,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.messages = [];
         $scope.groups = [];
         $scope.profiles = [];
-        $scope.pageSize = 2;
+        $scope.pageSize = 30;
         $scope.isListFull = false;
 
         getNextPage();
