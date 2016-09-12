@@ -112,11 +112,11 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
             vkSevanService
                 .getMessagesList($scope.messages.length, $scope.count)
                 .then(function (resp) {
-                    $scope.groups.concat(resp.groups);
-                    $scope.profiles.concat(resp.profiles);
+                    $scope.groups = $scope.groups.concat(resp.groups);
+                    $scope.profiles = $scope.profiles.concat(resp.profiles);
                     var wall = resp.wall;
                     wall.shift();
-                    $scope.messages.concat(wall);
+                    $scope.messages = $scope.messages.concat(wall);
                 });
         }
 
