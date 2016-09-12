@@ -47,6 +47,7 @@ app.factory('vkSevanService', function($q) {
         },
 
         getMessagesList: function(offset, count) {
+            console.log("service");
             var def = $q.defer();
 
             var query = {
@@ -107,8 +108,10 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.count = 2;
 
         getNextPage();
+        console.log("controller");
 
         function getNextPage() {
+            console.log("getNextPage");
             vkSevanService
                 .getMessagesList($scope.messages.length, $scope.count)
                 .then(function (resp) {
