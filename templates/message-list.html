@@ -1,17 +1,15 @@
 <div class="content">
-    <table id="messagesDataTable">
+    <table id="messagesDataTable" border="1">
         <tr>
             <th></th>
             <th>Text</th>
-            <th>Comments count</th>
         </tr>
         <tr ng-repeat="message in messages">
+            <td><a href="" ng-click="repostMessage(message)">Repost</a></td>
             <td>{{message.text}}</td>
             <td ng-repeat="attach in message.attachments">
                 <img ng-src="{{attach.photo.src_small}}" />
             </td>
-            <td>{{message.comments.count}}</td>
-            <td><a href="" ng-click="repostMessage(message)">Repost</a></td>
         </tr>
     </table>
 </div>
