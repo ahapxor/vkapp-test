@@ -13,6 +13,6 @@
         </tr>
     </table>
     <div>Загружено постов {{messages.length}}</div><br>
-    <div ng-show="isListFull">Больше постов нет</div><br>
+    <div ng-show="isListFull" style="color: red;">Больше постов нет</div><br>
     <button ng-click="getNextPage()" ng-disabled="isListFull">Ещё постов</button>
 </div>
