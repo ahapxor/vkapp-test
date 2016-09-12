@@ -119,8 +119,8 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
                     var wall = resp.wall;
                     var count = wall.shift();
-                    $scope.isListFull = $scope.messages.length >= count;
                     $scope.messages = $scope.messages.concat(wall);
+                    $scope.isListFull = $scope.messages.length >= count;
                 });
         }
 
