@@ -137,7 +137,7 @@ app.controller('app.baseRepostController', ['$scope', 'vkSevanService',
 
 app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
     function ($scope, $controller, vkSevanService) {
-        $controller('app.baseCrudController', { $scope: $scope });
+        $controller('app.baseRepostController', { $scope: $scope });
 
         $scope.messages = [];
         $scope.groups = [];
@@ -171,7 +171,7 @@ app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanSe
 
 app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanService',
     function ($scope, $controller, vkSevanService) {
-        $controller('app.baseCrudController', { $scope: $scope });
+        $controller('app.baseRepostController', { $scope: $scope });
 
         $scope.postLink = "";
         $scope.parsedId = "";
