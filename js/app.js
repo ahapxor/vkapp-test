@@ -17,13 +17,13 @@ app.config(function($routeProvider) {
         // route for the about page
         .when('/one-post', {
             templateUrl : 'templates/one-post.html',
-            controller  : 'onePostController'
+            controller  : 'app.onePostController'
         })
 
         // route for the contact page
         .when('/search', {
             templateUrl : 'templates/search.html',
-            controller  : 'searchController'
+            controller  : 'app.searchController'
         })
 
         .otherwise({
