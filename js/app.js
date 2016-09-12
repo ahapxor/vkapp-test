@@ -123,7 +123,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
                 });
         }
 
-        $scope.getNextPage = getNextPage();
+        $scope.getNextPage = getNextPage;
 
         $scope.repostMessage = function (message) {
             vkSevanService
