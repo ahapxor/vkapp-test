@@ -105,7 +105,7 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.messages = [];
         $scope.groups = [];
         $scope.profiles = [];
-        $scope.count = 2;
+        $scope.isListFull = false;
 
         getNextPage();
         console.log("controller");
@@ -118,7 +118,8 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
                     $scope.groups = $scope.groups.concat(resp.groups);
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
                     var wall = resp.wall;
-                    wall.shift();
+                    var count = wall.shift();
+                    $scope.isListFull = $scope.messages.length >= count;
                     $scope.messages = $scope.messages.concat(wall);
                 });
         }
