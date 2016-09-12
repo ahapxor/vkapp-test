@@ -37,7 +37,7 @@ app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
-        groupId: -18923086,
+        groupId: -125683505,
         toGroupId: -125683505,
         //groupId: -18923086,
 
