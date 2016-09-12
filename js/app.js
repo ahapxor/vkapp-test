@@ -155,7 +155,8 @@ app.controller('app.onePostController', ['$scope', 'vkSevanService',
 
         $scope.parseId = function() {
             var parseRegex = /wall(-[0-9]+_[0-9]+)/;
-            $scope.parsedId = parseRegex.exec($scope.postLink)[1];
+            var matches = parseRegex.exec($scope.postLink);
+            $scope.parsedId = !!matches && matches.length > 1 ? matches[1] : "";
         }
 }]);
 
