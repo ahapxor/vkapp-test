@@ -104,15 +104,23 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
         $scope.messages = [];
         $scope.groups = [];
         $scope.profiles = [];
+        $scope.count = 2;
 
-        vkSevanService
-            .getMessagesList(0, 25)
-            .then(function(resp) {
-                $scope.groups = resp.groups;
-                $scope.profiles = resp.profiles;
-                $scope.messages = resp.wall;
-                $scope.messages.shift();
-            });
+        getNextPage();
+
+        function getNextPage() {
+            vkSevanService
+                .getMessagesList($scope.messages.length, $scope.count)
+                .then(function (resp) {
+                    $scope.groups.concat(resp.groups);
+                    $scope.profiles.concat(resp.profiles);
+                    var wall = resp.wall;
+                    wall.shift();
+                    $scope.messages.concat(wall);
+                });
+        }
+
+        $scope.getNextPage = getNextPage();
 
         $scope.repostMessage = function (message) {
             vkSevanService
