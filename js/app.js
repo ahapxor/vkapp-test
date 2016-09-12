@@ -49,12 +49,14 @@ app.factory('vkSevanService', function($q) {
         getMessagesList: function(offset, count) {
             var def = $q.defer();
 
-            VK.api('wall.get', {
-                    owner_id: this.groupId,
-                    filter: "others",
-                    offset: offset,
-                    count: count
-                },
+            var query = {
+                owner_id: this.groupId,
+                filter: "others",
+                extended: 1,
+                offset: offset,
+                count: count
+            };
+            VK.api('wall.get', query,
                 function (r) {
                     var resp = r.response;
                     resp.shift();
@@ -123,6 +125,10 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
             }
 
         };
+
+        $scope.getOwnerName = function(post) {
+            return null;
+        }
 }]);
 
 app.controller('app.onePostController', ['$scope', 'vkSevanService',
