@@ -9,22 +9,22 @@ app.config(function($routeProvider) {
     $routeProvider
 
     // route for the home page
-    //    .when('/', {
-    //        templateUrl : 'templates/message-list.html',
-    //        controller  : 'app.messageListController'
-    //    })
+        .when('/', {
+            templateUrl : 'templates/message-list.html',
+            controller  : 'app.messageListController'
+        })
 
         // route for the about page
-        //.when('/configs', {
-        //    templateUrl : 'resources/pages/configs.html',
-        //    controller  : 'configsController'
-        //})
+        .when('/one-post', {
+            templateUrl : 'templates/one-post.html',
+            controller  : 'onePostController'
+        })
 
         // route for the contact page
-        //.when('/java-deploy', {
-        //    templateUrl : 'resources/pages/java-deploy.html',
-        //    controller  : 'javaDeployController'
-        //})
+        .when('/search', {
+            templateUrl : 'templates/search.html',
+            controller  : 'searchController'
+        })
 
         .otherwise({
             redirectTo: '/',
@@ -123,4 +123,14 @@ app.controller('app.messageListController', ['$scope', 'vkSevanService',
             }
 
         };
+}]);
+
+app.controller('app.onePostController', ['$scope', 'vkSevanService',
+    function ($scope, vkSevanService) {
+        $scope.messages = [];
+}]);
+
+app.controller('app.searchController', ['$scope', 'vkSevanService',
+    function ($scope, vkSevanService) {
+        $scope.messages = [];
 }]);
