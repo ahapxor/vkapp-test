@@ -157,32 +157,31 @@ app.controller('app.baseRepostController', ['$scope', 'vkSevanService',
         };
 }]);
 
-app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
+app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanService',
     function ($scope, $controller, vkSevanService) {
         $controller('app.baseRepostController', { $scope: $scope });
-
         $scope.messages = [];
         $scope.groups = [];
         $scope.profiles = [];
         $scope.pageSize = 30;
         $scope.isListFull = false;
 
-        getNextPage();
-        console.log("app.messageListController controller");
+
 
         function getNextPage() {
             console.log("getNextPage");
             if($scope.isListFull) {
                 return;
             }
-            vkSevanService
-                .getMessagesList($scope.messages.length, $scope.pageSize)
+            $scope.searchApi()
                 .then(function (resp) {
                     $scope.groups = $scope.groups.concat(resp.groups);
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
                     var wall = resp.wall;
                     var count = wall.shift();
-                    $scope.messages = $scope.messages.concat(wall);
+                    $scope.messages = $scope.messages.concat(wall.map(function (str) {
+                        str.replace(/<br>/g, "\n")
+                    }));
                     $scope.isListFull = $scope.messages.length >= count;
                 });
         }
@@ -192,6 +191,19 @@ app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanSe
         $scope.getOwnerName = function(post) {
             return null;
         }
+}]);
+app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
+    function ($scope, $controller, vkSevanService) {
+        $controller('app.baseListController', { $scope: $scope });
+        $scope.searchApi = function() {
+            return vkSevanService
+                .getMessagesList($scope.messages.length, $scope.pageSize);
+
+        };
+
+        $scope.getNextPage();
+        console.log("app.messageListController controller");
+
 }]);
 
 app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanService',
@@ -223,14 +235,9 @@ app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServic
 
 app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService',
     function ($scope, $controller, vkSevanService) {
-        $controller('app.baseRepostController', { $scope: $scope });
+        $controller('app.baseListController', { $scope: $scope });
 
         $scope.queryText = "";
-        $scope.messages = [];
-        $scope.groups = [];
-        $scope.profiles = [];
-        $scope.pageSize = 30;
-        $scope.isListFull = false;
 
         $scope.search = function(keyEvent) {
             if (keyEvent.which === 13) {
@@ -242,26 +249,8 @@ app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService
             }
         };
 
-        function getNextPage() {
-            console.log("app.searchController getNextPage");
-            if($scope.isListFull) {
-                return;
-            }
-            vkSevanService
-                .getSearchList($scope.queryText, $scope.messages.length, $scope.pageSize)
-                .then(function (resp) {
-                    $scope.groups = $scope.groups.concat(resp.groups);
-                    $scope.profiles = $scope.profiles.concat(resp.profiles);
-                    var wall = resp.wall;
-                    var count = wall.shift();
-                    $scope.messages = $scope.messages.concat(wall);
-                    $scope.isListFull = $scope.messages.length >= count;
-                });
-        }
-
-        $scope.getNextPage = getNextPage;
-
-        $scope.getOwnerName = function(post) {
-            return null;
-        }
+        $scope.searchApi = function() {
+            return vkSevanService
+                        .getSearchList($scope.queryText, $scope.messages.length, $scope.pageSize)
+        };
 }]);
