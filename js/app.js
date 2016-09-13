@@ -179,10 +179,7 @@ app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanServi
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
                     var wall = resp.wall;
                     var count = wall.shift();
-                    $scope.messages = $scope.messages.concat(wall.map(function (msg) {
-                        msg.text = msg.text.replace(/<br>/g, "\n");
-                        return msg;
-                    }));
+                    $scope.messages = $scope.messages.concat(wall);
                     $scope.isListFull = $scope.messages.length >= count;
                 });
         }
