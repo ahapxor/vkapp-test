@@ -246,7 +246,7 @@ app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService
                 $scope.groups = [];
                 $scope.profiles = [];
                 $scope.isListFull = false;
-                getNextPage();
+                $scope.getNextPage();
             }
         };
 
