@@ -250,7 +250,7 @@ app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService
                 .then(function (resp) {
                     $scope.groups = $scope.groups.concat(resp.groups);
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
-                    var wall = resp.items;
+                    var wall = resp.wall;
                     var count = wall.shift();
                     $scope.messages = $scope.messages.concat(wall);
                     $scope.isListFull = $scope.messages.length >= count;
