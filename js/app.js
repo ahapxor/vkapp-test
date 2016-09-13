@@ -179,8 +179,9 @@ app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanServi
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
                     var wall = resp.wall;
                     var count = wall.shift();
-                    $scope.messages = $scope.messages.concat(wall.map(function (str) {
-                        str.replace(/<br>/g, "\n")
+                    $scope.messages = $scope.messages.concat(wall.map(function (msg) {
+                        msg.text = msg.text.replace(/<br>/g, "\n");
+                        return msg;
                     }));
                     $scope.isListFull = $scope.messages.length >= count;
                 });
