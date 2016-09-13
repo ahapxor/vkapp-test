@@ -6,7 +6,7 @@
         </tr>
         <tr ng-repeat="message in messages">
             <td><button ng-click="repostMessage(message)">Repost</button></td>
-            <td><pre>{{message.text}}</pre>></td>
+            <td><pre>{{message.text}}</pre></td>
             <td ng-repeat="attach in message.attachments">
                 <img ng-src="{{getAttachPreview(attach)}}" />
             </td>
