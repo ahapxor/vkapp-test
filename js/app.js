@@ -138,8 +138,8 @@ app.factory('vkSevanService', function($q) {
     return vk;
 });
 
-app.controller('app.baseRepostController', ['$scope', 'vkSevanService',
-    function ($scope, vkSevanService) {
+app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
+    function ($scope, $sce, vkSevanService) {
         $scope.repostMessage = function (message) {
             vkSevanService
                 .postMessage(message.text, message.attachments)
@@ -155,7 +155,12 @@ app.controller('app.baseRepostController', ['$scope', 'vkSevanService',
             }
 
         };
-}]);
+
+        $scope.renderHtml = function(html_code)
+        {
+            return $sce.trustAsHtml(html_code);
+        };
+    }]);
 
 app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanService',
     function ($scope, $controller, vkSevanService) {
