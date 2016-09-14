@@ -162,7 +162,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
         };
 
         $scope.formatDate = function(date) {
-            return date.toString();
+            return new Date(date * 1000).toString();
         }
     }]);
 
