@@ -160,6 +160,10 @@ app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
         {
             return $sce.trustAsHtml(html_code);
         };
+
+        $scope.formatDate = function(date) {
+            return date.toString();
+        }
     }]);
 
 app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanService',
