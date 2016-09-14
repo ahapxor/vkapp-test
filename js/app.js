@@ -114,7 +114,7 @@ app.factory('vkSevanService', function($q) {
 
         postMessage: function(message, attachments) {
             var def = $q.defer();
-            message = encodeURIComponent(message.replace(/<br>/g, "\n"));
+            message = escape(message.replace(/<br>/g, "\n"));
             var requestParams = {
                 owner_id: this.toGroupId,
                 from_group: 1,
