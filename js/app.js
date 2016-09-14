@@ -34,6 +34,18 @@ app.config(function($routeProvider) {
 });
 
 app.factory('vkSevanService', function($q) {
+
+    var ranges = [
+        '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+        '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+        '\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
+    ].join('|');
+
+    function stripEmoji(message) {
+        return message.replace(new RegExp(ranges, 'g'), '');
+    }
+
+
     var vk = {
         data: {},
         appID: 5561099,
@@ -114,7 +126,7 @@ app.factory('vkSevanService', function($q) {
 
         postMessage: function(message, attachments) {
             var def = $q.defer();
-            message = message.replace(/<br>/g, "\n");
+            message = stripEmoji(message.replace(/<br>/g, "\n"));
             var requestParams = {
                 owner_id: this.toGroupId,
                 from_group: 1,
