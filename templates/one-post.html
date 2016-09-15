@@ -2,7 +2,7 @@
 
     <label for="in-post">Ссылка на пост</label>
     <input id="in-post" type="text" ng-model="postLink" ng-change="reloadMessage()">
-    <table id="messagesDataTable" border="1">
+    <table id="messagesDataTable" border="1" ng-show="!!message.text">
         <tr>
             <th>Message</th>
         </tr>
@@ -11,7 +11,7 @@
                 <button ng-click="repostMessage(message)">Repost</button>
                 <div class="metaInfo"><a target="_blank" ng-href="https://vk.com/{{getOwner(message.from_id).link}}">
                     <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}</a></div>
-                <div class="metaInfo" ng-show="!!message.text">{{formatDate(message.date)}}</div>
+                <div class="metaInfo" >{{formatDate(message.date)}}</div>
                 <div ng-bind-html="renderHtml(message.text)"></div>
                 <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments" />
             </td>
