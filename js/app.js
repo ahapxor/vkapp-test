@@ -104,7 +104,8 @@ app.factory('vkSevanService', function($q) {
             var def = $q.defer();
 
             var query = {
-                posts: id
+                posts: id,
+                extended: 1
             };
             VK.api('wall.getById', query,
                 function (r) {
