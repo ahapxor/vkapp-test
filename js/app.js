@@ -130,6 +130,7 @@ app.factory('vkSevanService', function($q) {
             var requestParams = {
                 owner_id: this.toGroupId,
                 from_group: 1,
+                signed: 1,
                 message: message
             };
 
