@@ -8,8 +8,8 @@
             <th>Message</th>
         </tr>
         <tr ng-repeat="message in messages">
-            <td><button ng-click="repostMessage(message)">Repost</button></td>
             <td>
+                <button ng-click="repostMessage(message)">Repost</button>
                 <div class="metaInfo"><a ng-href="/{{getOwner(message.from_id).link}}">
                     <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}</a></div>
                 <div class="metaInfo">{{formatDate(message.date)}}</div>
