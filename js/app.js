@@ -154,6 +154,9 @@ app.factory('vkSevanService', function($q) {
 
 app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
     function ($scope, $sce, vkSevanService) {
+        $scope.groups = [];
+        $scope.profiles = [];
+
         $scope.repostMessage = function (message) {
             vkSevanService
                 .postMessage(message.text, message.attachments)
@@ -177,37 +180,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
 
         $scope.formatDate = function(date) {
             return new Date(date * 1000).toString();
-        }
-    }]);
-
-app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanService',
-    function ($scope, $controller, vkSevanService) {
-        $controller('app.baseRepostController', { $scope: $scope });
-        $scope.messages = [];
-        $scope.groups = [];
-        $scope.profiles = [];
-        $scope.pageSize = 30;
-        $scope.isListFull = false;
-
-
-
-        function getNextPage() {
-            console.log("getNextPage");
-            if($scope.isListFull) {
-                return;
-            }
-            $scope.searchApi()
-                .then(function (resp) {
-                    $scope.groups = $scope.groups.concat(resp.groups);
-                    $scope.profiles = $scope.profiles.concat(resp.profiles);
-                    var wall = resp.wall;
-                    var count = wall.shift();
-                    $scope.messages = $scope.messages.concat(wall);
-                    $scope.isListFull = $scope.messages.length >= count;
-                });
-        }
-
-        $scope.getNextPage = getNextPage;
+        };
 
         $scope.getOwner = function(fromId) {
             var profile = $scope.profiles.find(function(prof) {
@@ -238,8 +211,36 @@ app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanServi
                     };
                 }
             }
+        };
+    }]);
+
+app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanService',
+    function ($scope, $controller, vkSevanService) {
+        $controller('app.baseRepostController', { $scope: $scope });
+        $scope.messages = [];
+        $scope.pageSize = 30;
+        $scope.isListFull = false;
+
+
+
+        function getNextPage() {
+            console.log("getNextPage");
+            if($scope.isListFull) {
+                return;
+            }
+            $scope.searchApi()
+                .then(function (resp) {
+                    $scope.groups = $scope.groups.concat(resp.groups);
+                    $scope.profiles = $scope.profiles.concat(resp.profiles);
+                    var wall = resp.wall;
+                    var count = wall.shift();
+                    $scope.messages = $scope.messages.concat(wall);
+                    $scope.isListFull = $scope.messages.length >= count;
+                });
         }
-}]);
+
+        $scope.getNextPage = getNextPage;
+    }]);
 app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
     function ($scope, $controller, vkSevanService) {
         $controller('app.baseListController', { $scope: $scope });
@@ -276,7 +277,10 @@ app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServic
             vkSevanService
                 .getMessagesById(id)
                 .then(function (resp) {
-                    $scope.message = resp;
+                    $scope.message = resp.wall.length > 0 ? resp.wall[0] : {};
+                    $scope.groups = resp.groups;
+                    $scope.profiles = resp.profiles;
+
                 });
         };
     }]);
