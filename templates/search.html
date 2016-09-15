@@ -11,7 +11,7 @@
             <td><button ng-click="repostMessage(message)">Repost</button></td>
             <td>
                 <div class="dateColor">Дата поста: {{formatDate(message.date)}}</div>
-                <div>Автор: <a ng-href="/{{getOwner(message.from_id).link}}">
+                <div class="dateColor">Автор: <a ng-href="/{{getOwner(message.from_id).link}}">
                     <img ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}</a></div>
                 <div ng-bind-html="renderHtml(message.text)"></div>
                 <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments" />
