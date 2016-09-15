@@ -7,10 +7,10 @@
         <tr ng-repeat="message in messages">
             <td><button ng-click="repostMessage(message)">Repost</button></td>
             <td>
-                <div class="dateColor">Дата поста: {{formatDate(message.date)}}</div>
-                <div class="dateColor">Автор: <a ng-href="/{{getOwner(message.from_id).link}}">
+                <div class="metaInfo">Автор: <a target="_blank" ng-href="https://vk.com/{{getOwner(message.from_id).link}}">
                     <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}</a></div>
-                <div ng-bind-html="renderHtml(message.text)"></div>
+                <div class="metaInfo">Дата поста: {{formatDate(message.date)}}</div>
+                <div class="paddingTop20px" ng-bind-html="renderHtml(message.text)"></div>
                 <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments" />
             </td>
         </tr>
