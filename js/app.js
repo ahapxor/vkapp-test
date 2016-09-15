@@ -208,9 +208,9 @@ app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanServi
 
         $scope.getNextPage = getNextPage;
 
-        $scope.getOwner = function(post) {
+        $scope.getOwner = function(fromId) {
             var profile = $scope.profiles.find(function(prof) {
-                return prof.uid === post.from_id;
+                return prof.uid === fromId;
             });
             if(!!profile) {
                 var name = profile.first_name + " " + profile.last_name;
@@ -221,7 +221,7 @@ app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanServi
                 };
             } else {
                 var group = $scope.groups.find(function(gr) {
-                    return gr.gid === post.from_id;
+                    return gr.gid === -fromId;
                 });
                 if(!!group) {
                     return {
