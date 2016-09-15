@@ -208,8 +208,35 @@ app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanServi
 
         $scope.getNextPage = getNextPage;
 
-        $scope.getOwnerName = function(post) {
-            return null;
+        $scope.getOwner = function(post) {
+            var profile = $scope.profiles.find(function(prof) {
+                return prof.uid === post.from_id;
+            });
+            if(!!profile) {
+                var name = profile.first_name + " " + profile.last_name;
+                return {
+                    name: name,
+                    photo: profile.photo_medium_rec,
+                    link: profile.screen_name
+                };
+            } else {
+                var group = $scope.groups.find(function(gr) {
+                    return gr.gid === post.from_id;
+                });
+                if(!!group) {
+                    return {
+                        name: group.name,
+                        photo: group.photo,
+                        link: group.screen_name
+                    };
+                } else {
+                    return {
+                        name: "",
+                        photo: "",
+                        link: ""
+                    };
+                }
+            }
         }
 }]);
 app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
