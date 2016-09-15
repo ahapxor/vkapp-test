@@ -109,7 +109,7 @@ app.factory('vkSevanService', function($q) {
             };
             VK.api('wall.getById', query,
                 function (r) {
-                    var resp = r.response[0];
+                    var resp = r.response;
                     def.resolve(resp);
                 });
 
