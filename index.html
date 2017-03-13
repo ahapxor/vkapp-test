@@ -52,9 +52,8 @@
         <a class="btn" ng-href="/vkapp-test/#/{{selectedGroup}}/one-post">Репост по ссылке</a>
         <a class="btn" ng-href="/vkapp-test/#/{{selectedGroup}}/search">Поиск по постам</a>
 
-        <select ng-model="selectedGroup">
-            <option value="-124741817">КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!</option>
-            <option value="-18923086">sevanimals</option>
+        <select ng-model="data.selectedGroup"
+                ng-options="option.name for option in data.availableOptions track by option.id">
         </select>
     </div>
     <div id="main" class="main">
