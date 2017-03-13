@@ -168,8 +168,8 @@ app.controller('app.groupSelectController', ['$scope', '$location', function ($s
         selectedOption: availableOptions[0]
     };
 
-    $scope.update = function() {
-        $location.path("/" + $scope.data.selectedOption.id)
+    $scope.update = function(newValue) {
+        $location.path("/" + newValue.selectedOption.id)
     }
 }]);
 
