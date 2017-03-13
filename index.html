@@ -54,7 +54,7 @@
 
         <select ng-init="data.selectedGroup = data.availableOptions[0]"
                 ng-model="data.selectedGroup"
-                ng-options="option.name for option in data.availableOptions track by option.id"
+                ng-options="option.name disable when option.disabled for option in data.availableOptions track by option.id"
                 ng-change="update()">
         </select>
     </div>
