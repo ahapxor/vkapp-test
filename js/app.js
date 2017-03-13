@@ -157,7 +157,7 @@ app.factory('vkSevanServiceFactory', function($q) {
     };
 });
 
-app.controller('app.groupSelectController', ['$scope', function ($scope) {
+app.controller('app.groupSelectController', ['$scope', '$location', function ($scope, $location) {
     var availableOptions = [
         {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
         {id: '-18923086', name: 'sevanimals'}
@@ -166,6 +166,10 @@ app.controller('app.groupSelectController', ['$scope', function ($scope) {
         availableOptions: availableOptions,
         selectedOption: availableOptions[0]
     };
+
+    $scope.update = function() {
+        $location.url("/" + $scope.data.selectedOption.id)
+    }
 }]);
 
 app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'vkSevanServiceFactory',
