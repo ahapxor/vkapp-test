@@ -33,132 +33,137 @@ app.config(function($routeProvider) {
         });
 });
 
-app.factory('vkSevanService', function($q) {
+app.factory('vkSevanServiceFactory', function($q) {
+    return function (groupId) {
 
-    var ranges = [
-        '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
-        '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
-        '\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
-    ].join('|');
+        var ranges = [
+            '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+            '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+            '\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
+        ].join('|');
 
-    function stripEmoji(message) {
-        return message.replace(new RegExp(ranges, 'g'), '');
-    }
-
-
-    var vk = {
-        data: {},
-        appID: 5561099,
-        fromGroupId: -124741817,
-        toGroupId: -124741817,
-        // fromGroupId: -18923086,
-        // toGroupId: -18923086,
-
-        init: function () {
-            VK.init({apiId: vk.appID});
-            //VK.callMethod('showSettingsBox', 0);
-        },
-
-        getMessagesList: function(offset, count) {
-            console.log("service");
-            var def = $q.defer();
-
-            var query = {
-                owner_id: this.fromGroupId,
-                filter: "others",
-                extended: 1,
-                offset: offset,
-                count: count
-            };
-            VK.api('wall.get', query,
-                function (r) {
-                    var resp = r.response;
-                    def.resolve(resp);
-                });
-
-            return def.promise;
-        },
-
-        getSearchList: function(queryText, offset, count) {
-            console.log("service");
-            var def = $q.defer();
-
-            var query = {
-                owner_id: this.fromGroupId,
-                query: queryText,
-                extended: 1,
-                offset: offset,
-                count: count
-            };
-            VK.api('wall.search', query,
-                function (r) {
-                    var resp = r.response;
-                    def.resolve(resp);
-                });
-
-            return def.promise;
-        },
-
-        getMessagesById: function(id) {
-            console.log("service getMessagesById");
-            var def = $q.defer();
-
-            var query = {
-                posts: id,
-                extended: 1
-            };
-            VK.api('wall.getById', query,
-                function (r) {
-                    var resp = r.response;
-                    def.resolve(resp);
-                });
-
-            return def.promise;
-        },
-
-        getAttachmentsInString: function (attachments) {
-            return attachments
-                .map(function (attach) {
-                    var attachType = attach.type;
-                    var attachment = attach[attachType];
-                    return attachType + attachment.owner_id + "_" + (!!attachment.pid ? attachment.pid : attachment.vid)
-                }).join();
-        },
-
-        postMessage: function(message, attachments) {
-            var def = $q.defer();
-            message = stripEmoji(message.replace(/<br>/g, "\n"));
-            var requestParams = {
-                owner_id: this.toGroupId,
-                from_group: 1,
-                signed: 1,
-                message: message
-            };
-
-            if(!!attachments) {
-                requestParams.attachments = this.getAttachmentsInString(attachments);
-            }
-
-            VK.api('wall.post', requestParams,
-                function (r) {
-                    var resp = r.response;
-                    def.resolve(resp);
-                });
-
-            return def.promise;
+        function stripEmoji(message) {
+            return message.replace(new RegExp(ranges, 'g'), '');
         }
+
+
+        var vk = {
+            data: {},
+            appID: 5561099,
+
+            fromGroupId: groupId,
+            toGroupId: groupId,
+            // fromGroupId: -124741817,
+            // toGroupId: -124741817,
+            // fromGroupId: -18923086,
+            // toGroupId: -18923086,
+
+            init: function () {
+                VK.init({apiId: vk.appID});
+                //VK.callMethod('showSettingsBox', 0);
+            },
+
+            getMessagesList: function (offset, count) {
+                console.log("service");
+                var def = $q.defer();
+
+                var query = {
+                    owner_id: this.fromGroupId,
+                    filter: "others",
+                    extended: 1,
+                    offset: offset,
+                    count: count
+                };
+                VK.api('wall.get', query,
+                    function (r) {
+                        var resp = r.response;
+                        def.resolve(resp);
+                    });
+
+                return def.promise;
+            },
+
+            getSearchList: function (queryText, offset, count) {
+                console.log("service");
+                var def = $q.defer();
+
+                var query = {
+                    owner_id: this.fromGroupId,
+                    query: queryText,
+                    extended: 1,
+                    offset: offset,
+                    count: count
+                };
+                VK.api('wall.search', query,
+                    function (r) {
+                        var resp = r.response;
+                        def.resolve(resp);
+                    });
+
+                return def.promise;
+            },
+
+            getMessagesById: function (id) {
+                console.log("service getMessagesById");
+                var def = $q.defer();
+
+                var query = {
+                    posts: id,
+                    extended: 1
+                };
+                VK.api('wall.getById', query,
+                    function (r) {
+                        var resp = r.response;
+                        def.resolve(resp);
+                    });
+
+                return def.promise;
+            },
+
+            getAttachmentsInString: function (attachments) {
+                return attachments
+                    .map(function (attach) {
+                        var attachType = attach.type;
+                        var attachment = attach[attachType];
+                        return attachType + attachment.owner_id + "_" + (!!attachment.pid ? attachment.pid : attachment.vid)
+                    }).join();
+            },
+
+            postMessage: function (message, attachments) {
+                var def = $q.defer();
+                message = stripEmoji(message.replace(/<br>/g, "\n"));
+                var requestParams = {
+                    owner_id: this.toGroupId,
+                    from_group: 1,
+                    signed: 1,
+                    message: message
+                };
+
+                if (!!attachments) {
+                    requestParams.attachments = this.getAttachmentsInString(attachments);
+                }
+
+                VK.api('wall.post', requestParams,
+                    function (r) {
+                        var resp = r.response;
+                        def.resolve(resp);
+                    });
+
+                return def.promise;
+            }
+        };
+        vk.init();
+        return vk;
     };
-    vk.init();
-    return vk;
 });
 
-app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
-    function ($scope, $sce, vkSevanService) {
+app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanServiceFactory',
+    function ($scope, $sce, vkSevanServiceFactory) {
         $scope.groups = [];
         $scope.profiles = [];
 
         $scope.repostMessage = function (message) {
-            vkSevanService
+            vkSevanServiceFactory(-124741817)
                 .postMessage(message.text, message.attachments)
         };
 
@@ -214,8 +219,8 @@ app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
         };
     }]);
 
-app.controller('app.baseListController', ['$scope', '$controller', '$routeParams', 'vkSevanService',
-    function ($scope, $controller, $routeParams, vkSevanService) {
+app.controller('app.baseListController', ['$scope', '$controller',
+    function ($scope, $controller) {
         $controller('app.baseRepostController', { $scope: $scope });
         $scope.messages = [];
         $scope.pageSize = 30;
@@ -241,11 +246,11 @@ app.controller('app.baseListController', ['$scope', '$controller', '$routeParams
 
         $scope.getNextPage = getNextPage;
     }]);
-app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanService',
-    function ($scope, $controller, vkSevanService) {
+app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanServiceFactory',
+    function ($scope, $controller, vkSevanServiceFactory) {
         $controller('app.baseListController', { $scope: $scope });
         $scope.searchApi = function() {
-            return vkSevanService
+            return vkSevanServiceFactory(-124741817)
                 .getMessagesList($scope.messages.length, $scope.pageSize);
 
         };
@@ -255,8 +260,8 @@ app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanSe
 
 }]);
 
-app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanService',
-    function ($scope, $controller, vkSevanService) {
+app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServiceFactory',
+    function ($scope, $controller, vkSevanServiceFactory) {
         $controller('app.baseRepostController', { $scope: $scope });
 
         $scope.postLink = "";
@@ -274,7 +279,7 @@ app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServic
             if(id.length == 0) {
                 return;
             }
-            vkSevanService
+            vkSevanServiceFactory(-124741817)
                 .getMessagesById(id)
                 .then(function (resp) {
                     $scope.message = resp.wall.length > 0 ? resp.wall[0] : {};
@@ -285,8 +290,8 @@ app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServic
         };
     }]);
 
-app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService',
-    function ($scope, $controller, vkSevanService) {
+app.controller('app.searchController', ['$scope', '$controller', 'vkSevanServiceFactory',
+    function ($scope, $controller, vkSevanServiceFactory) {
         $controller('app.baseListController', { $scope: $scope });
 
         $scope.queryText = "";
@@ -302,7 +307,7 @@ app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService
         };
 
         $scope.searchApi = function() {
-            return vkSevanService
+            return vkSevanServiceFactory(-124741817)
                         .getSearchList($scope.queryText, $scope.messages.length, $scope.pageSize)
         };
 }]);
