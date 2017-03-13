@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
         })
 
         .otherwise({
-            redirectTo: '/:groupId',
+            redirectTo: '/-124741817',
             templateUrl : 'templates/message-list.html',
             controller  : 'app.messageListController'
         });
