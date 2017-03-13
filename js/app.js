@@ -33,7 +33,7 @@ app.config(function($routeProvider) {
         });
 });
 
-app.factory('vkSevanService', function($q) {
+app.factory('vkSevanService', function($q, $routeParams) {
 
     var ranges = [
         '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
@@ -49,8 +49,8 @@ app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
-        fromGroupId: -124741817,
-        toGroupId: -124741817,
+        fromGroupId: $routeParams.groupId,
+        toGroupId: $routeParams.groupId,
         // fromGroupId: -18923086,
         // toGroupId: -18923086,
 
