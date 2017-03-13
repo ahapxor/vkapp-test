@@ -48,9 +48,9 @@
 
 <body>
     <div ng-controller="app.groupSelectController">
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedGroup.id}}">Список постов</a>
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedGroup.id}}/one-post">Репост по ссылке</a>
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedGroup.id}}/search">Поиск по постам</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}">Список постов</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/one-post">Репост по ссылке</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search">Поиск по постам</a>
 
         <select ng-model="data.selectedOption"
                 ng-options="option.name disable when option.disabled for option in data.availableOptions track by option.id"
