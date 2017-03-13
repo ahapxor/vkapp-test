@@ -161,6 +161,7 @@ app.controller('app.groupSelectController', ['$scope', '$location', function ($s
     var availableOptions = [
         {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
         {id: '-98661857', name: '"Наше Сердце и Душа" помощь бездомным животным'},
+        {id: '-90113911', name: 'заМУРчательныйЗООмагазин'},
         {id: '-18923086', name: 'sevanimals', disabled: true}
     ];
     $scope.data = {
