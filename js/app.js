@@ -9,25 +9,25 @@ app.config(function($routeProvider) {
     $routeProvider
 
     // route for the home page
-        .when('/', {
+        .when('/:groupId', {
             templateUrl : 'templates/message-list.html',
             controller  : 'app.messageListController'
         })
 
         // route for the about page
-        .when('/one-post', {
+        .when('/:groupId/one-post', {
             templateUrl : 'templates/one-post.html',
             controller  : 'app.onePostController'
         })
 
         // route for the contact page
-        .when('/search', {
+        .when('/:groupId/search', {
             templateUrl : 'templates/search.html',
             controller  : 'app.searchController'
         })
 
         .otherwise({
-            redirectTo: '/',
+            redirectTo: '/:groupId',
             templateUrl : 'templates/message-list.html',
             controller  : 'app.messageListController'
         });
@@ -49,10 +49,10 @@ app.factory('vkSevanService', function($q) {
     var vk = {
         data: {},
         appID: 5561099,
-        //groupId: -125683505,
-        //toGroupId: -125683505,
-        groupId: -18923086,
-        toGroupId: -18923086,
+        fromGroupId: -124741817,
+        toGroupId: -124741817,
+        // fromGroupId: -18923086,
+        // toGroupId: -18923086,
 
         init: function () {
             VK.init({apiId: vk.appID});
@@ -64,7 +64,7 @@ app.factory('vkSevanService', function($q) {
             var def = $q.defer();
 
             var query = {
-                owner_id: this.groupId,
+                owner_id: this.fromGroupId,
                 filter: "others",
                 extended: 1,
                 offset: offset,
@@ -84,7 +84,7 @@ app.factory('vkSevanService', function($q) {
             var def = $q.defer();
 
             var query = {
-                owner_id: this.groupId,
+                owner_id: this.fromGroupId,
                 query: queryText,
                 extended: 1,
                 offset: offset,
