@@ -157,6 +157,8 @@ app.factory('vkSevanServiceFactory', function($q) {
     };
 });
 
+app.controller('app.groupSelectController', ['$scope', function ($scope) {}]);
+
 app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'vkSevanServiceFactory',
     function ($scope, $sce, $routeParams, vkSevanServiceFactory) {
         $scope.groups = [];

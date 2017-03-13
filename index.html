@@ -47,9 +47,16 @@
 </head>
 
 <body>
-    <a class="btn" href="/vkapp-test/#/-124741817">Список постов</a>
-    <a class="btn"  href="/vkapp-test/#/-124741817/one-post">Репост по ссылке</a>
-    <a class="btn" href="/vkapp-test/#/-124741817/search">Поиск по постам</a>
+    <div ng-controller="app.groupSelectController">
+        <a class="btn" ng-href="/vkapp-test/#/{{selectedGroup}}">Список постов</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{selectedGroup}}/one-post">Репост по ссылке</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{selectedGroup}}/search">Поиск по постам</a>
+
+        <select ng-model="selectedGroup">
+            <option value="-124741817">КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!</option>
+            <option value="-18923086">sevanimals</option>
+        </select>
+    </div>
     <div id="main" class="main">
         <div ng-view></div>
     </div>
