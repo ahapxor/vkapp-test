@@ -157,13 +157,13 @@ app.factory('vkSevanServiceFactory', function($q) {
     };
 });
 
-app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanServiceFactory',
-    function ($scope, $sce, vkSevanServiceFactory) {
+app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'vkSevanServiceFactory',
+    function ($scope, $sce, $routeParams, vkSevanServiceFactory) {
         $scope.groups = [];
         $scope.profiles = [];
 
         $scope.repostMessage = function (message) {
-            vkSevanServiceFactory(-124741817)
+            vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .postMessage(message.text, message.attachments)
         };
 
@@ -246,11 +246,11 @@ app.controller('app.baseListController', ['$scope', '$controller',
 
         $scope.getNextPage = getNextPage;
     }]);
-app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanServiceFactory',
-    function ($scope, $controller, vkSevanServiceFactory) {
+app.controller('app.messageListController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
+    function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $controller('app.baseListController', { $scope: $scope });
         $scope.searchApi = function() {
-            return vkSevanServiceFactory(-124741817)
+            return vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .getMessagesList($scope.messages.length, $scope.pageSize);
 
         };
@@ -260,8 +260,8 @@ app.controller('app.messageListController', ['$scope', '$controller', 'vkSevanSe
 
 }]);
 
-app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServiceFactory',
-    function ($scope, $controller, vkSevanServiceFactory) {
+app.controller('app.onePostController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
+    function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $controller('app.baseRepostController', { $scope: $scope });
 
         $scope.postLink = "";
@@ -279,7 +279,7 @@ app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServic
             if(id.length == 0) {
                 return;
             }
-            vkSevanServiceFactory(-124741817)
+            vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .getMessagesById(id)
                 .then(function (resp) {
                     $scope.message = resp.wall.length > 0 ? resp.wall[0] : {};
@@ -290,8 +290,8 @@ app.controller('app.onePostController', ['$scope', '$controller', 'vkSevanServic
         };
     }]);
 
-app.controller('app.searchController', ['$scope', '$controller', 'vkSevanServiceFactory',
-    function ($scope, $controller, vkSevanServiceFactory) {
+app.controller('app.searchController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
+    function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $controller('app.baseListController', { $scope: $scope });
 
         $scope.queryText = "";
@@ -307,7 +307,7 @@ app.controller('app.searchController', ['$scope', '$controller', 'vkSevanService
         };
 
         $scope.searchApi = function() {
-            return vkSevanServiceFactory(-124741817)
+            return vkSevanServiceFactory(parseInt($routeParams.groupId))
                         .getSearchList($scope.queryText, $scope.messages.length, $scope.pageSize)
         };
 }]);
