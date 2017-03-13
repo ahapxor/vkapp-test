@@ -158,12 +158,13 @@ app.factory('vkSevanServiceFactory', function($q) {
 });
 
 app.controller('app.groupSelectController', ['$scope', function ($scope) {
+    var availableOptions = [
+        {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
+        {id: '-18923086', name: 'sevanimals'}
+    ];
     $scope.data = {
-        availableOptions: [
-            {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
-            {id: '-18923086', name: 'sevanimals'}
-        ],
-        selectedOption: {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'}
+        availableOptions: availableOptions,
+        selectedOption: availableOptions[0]
     };
 }]);
 
