@@ -33,7 +33,7 @@ app.config(function($routeProvider) {
         });
 });
 
-app.factory('vkSevanService', function($q, $routeParams) {
+app.factory('vkSevanService', function($q) {
 
     var ranges = [
         '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
@@ -49,8 +49,8 @@ app.factory('vkSevanService', function($q, $routeParams) {
     var vk = {
         data: {},
         appID: 5561099,
-        fromGroupId: $routeParams.groupId,
-        toGroupId: $routeParams.groupId,
+        fromGroupId: -124741817,
+        toGroupId: -124741817,
         // fromGroupId: -18923086,
         // toGroupId: -18923086,
 
@@ -214,8 +214,8 @@ app.controller('app.baseRepostController', ['$scope', '$sce', 'vkSevanService',
         };
     }]);
 
-app.controller('app.baseListController', ['$scope', '$controller', 'vkSevanService',
-    function ($scope, $controller, vkSevanService) {
+app.controller('app.baseListController', ['$scope', '$controller', '$routeParams', 'vkSevanService',
+    function ($scope, $controller, $routeParams, vkSevanService) {
         $controller('app.baseRepostController', { $scope: $scope });
         $scope.messages = [];
         $scope.pageSize = 30;
