@@ -159,10 +159,10 @@ app.factory('vkSevanServiceFactory', function($q) {
 
 app.controller('app.groupSelectController', ['$scope', '$location', function ($scope, $location) {
     var availableOptions = [
+        {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'},
         {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
         {id: '-98661857', name: '"Наше Сердце и Душа" помощь бездомным животным'},
-        {id: '-90113911', name: 'заМУРчательныйЗООмагазин'},
-        {id: '-18923086', name: 'sevanimals', disabled: true}
+        {id: '-90113911', name: 'заМУРчательныйЗООмагазин'}
     ];
     $scope.data = {
         availableOptions: availableOptions,
