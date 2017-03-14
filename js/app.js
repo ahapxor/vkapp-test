@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
         })
 
         .otherwise({
-            redirectTo: '/-124741817',
+            redirectTo: '/-18923086',
             templateUrl : 'templates/message-list.html',
             controller  : 'app.messageListController'
         });
