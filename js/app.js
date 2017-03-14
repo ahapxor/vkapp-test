@@ -3,6 +3,15 @@ function getQueryStringValue (key) {
         + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
 
+var availableGroups = [
+    {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'},
+    {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
+    {id: '-98661857', name: '"Наше Сердце и Душа" помощь бездомным животным'},
+    {id: '-90113911', name: 'заМУРчательныйЗООмагазин'}
+];
+
+var defaultGroup = availableGroups[0];
+
 var app = angular.module('app', ['ngRoute']);
 
 app.config(function($routeProvider) {
@@ -27,7 +36,7 @@ app.config(function($routeProvider) {
         })
 
         .otherwise({
-            redirectTo: '/-18923086',
+            redirectTo: '/' + defaultGroup.id,
             templateUrl : 'templates/message-list.html',
             controller  : 'app.messageListController'
         });
@@ -53,10 +62,6 @@ app.factory('vkSevanServiceFactory', function($q) {
 
             fromGroupId: groupId,
             toGroupId: groupId,
-            // fromGroupId: -124741817,
-            // toGroupId: -124741817,
-            // fromGroupId: -18923086,
-            // toGroupId: -18923086,
 
             init: function () {
                 VK.init({apiId: vk.appID});
@@ -158,15 +163,9 @@ app.factory('vkSevanServiceFactory', function($q) {
 });
 
 app.controller('app.groupSelectController', ['$scope', '$location', function ($scope, $location) {
-    var availableOptions = [
-        {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'},
-        {id: '-124741817', name: 'КОТЕЙКИ ищут ДОМ! Севастопольские КОТОкомбы!'},
-        {id: '-98661857', name: '"Наше Сердце и Душа" помощь бездомным животным'},
-        {id: '-90113911', name: 'заМУРчательныйЗООмагазин'}
-    ];
     $scope.data = {
-        availableOptions: availableOptions,
-        selectedOption: availableOptions[0]
+        availableOptions: availableGroups,
+        selectedOption: defaultGroup
     };
 
     $scope.update = function(newValue) {
