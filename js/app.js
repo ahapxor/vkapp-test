@@ -1,6 +1,6 @@
 function getQueryStringValue (key) {
     return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]"
-        + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        + encodeURI(key).replace(/[.+*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
 
 var availableGroups = [
