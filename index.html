@@ -52,6 +52,7 @@
         <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}">Список постов</a>
         <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/one-post">Репост по ссылке</a>
         <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search">Поиск по постам</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search-by-date">Поиск по дате</a>
 
         <select ng-model="data.selectedOption"
                 ng-options="option.name disable when option.disabled for option in data.availableOptions track by option.id"
@@ -67,6 +68,8 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script type="text/javascript" src="//unpkg.com/js-datepicker@3.3.3/datepicker.min.js"></script>
     <script type="text/javascript" charset="UTF-8" src="js/app.js"></script>
 </body>
 </html>

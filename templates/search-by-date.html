@@ -1,0 +1,24 @@
+<div class="content">
+    <label for="filter-date">Дата</label>
+    <input type="text" id="filter-date" class="qs-hidden"
+           placeholder="кликните для ввода даты" style="width:160px"
+           ng-model="dateFilterText" readonly="true">
+
+    <table id="messagesDataTable" border="1">
+        <tr>
+            <th>Message</th>
+        </tr>
+        <tr ng-repeat="message in messages">
+            <td>
+                <button ng-click="repostMessage(message)">Repost</button>
+                <div class="metaInfo"><a target="_blank" ng-href="https://vk.com/{{getOwner(message.from_id).link}}">
+                    <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}</a></div>
+                <div class="metaInfo">{{formatDate(message.date)}}</div>
+                <div class="paddingTop20px" ng-bind-html="renderHtml(message.text)"></div>
+                <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments" />
+            </td>
+        </tr>
+    </table>
+    <button ng-click="getNextPage()" ng-disabled="isListFull">Ещё постов</button>
+    <span>Загружено постов {{messages.length}}</span>|<span ng-show="isListFull" style="color: red;">Больше постов нет</span><br />
+</div>

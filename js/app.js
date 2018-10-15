@@ -39,6 +39,12 @@ app.config(function($routeProvider) {
             controller  : 'app.searchController'
         })
 
+        // route for the contact page
+        .when('/:groupId/search-by-date', {
+            templateUrl : 'templates/search-by-date.html',
+            controller  : 'app.searchByDateController'
+        })
+
         .otherwise({
             redirectTo: '/' + defaultGroup.id,
             templateUrl : 'templates/message-list.html',
@@ -329,5 +335,51 @@ app.controller('app.searchController', ['$scope', '$controller', '$routeParams',
         $scope.searchApi = function() {
             return vkSevanServiceFactory(parseInt($routeParams.groupId))
                         .getSearchList($scope.queryText, $scope.messages.length, $scope.pageSize)
+        };
+}]);
+
+app.controller('app.searchByDateController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
+    function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
+        const twoWeeks = new Date();
+        twoWeeks.setDate(twoWeeks.getDate() - 14);
+        const picker = datepicker("#search-date", {
+            startDate: new Date(),
+            dateSelected: new Date(),
+            minDate: twoWeeks,
+            maxDate: new Date(),
+            formatter: function(el, date, instance) {
+                el.value = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + new Date().getDate();
+            },
+            onSelect: function(instance) {
+                $scope.dateFilter = instance.dateSelected.getTime();
+                $scope.getNextPage();
+            }
+        });
+
+        $controller('app.baseListController', { $scope: $scope });
+
+        $scope.dateFilterText = "";
+        $scope.dateFilter = 0;
+
+        $scope.offset = 0;
+
+        $scope.searchApi = function() {
+            const startTS = $scope.dateFilter;
+            const endTS = startTS + 86400000;
+
+            vkSevanServiceFactory(parseInt($routeParams.groupId))
+                .getMessagesList($scope.offset, $scope.pageSize)
+                .then(function (r) {
+                    $scope.offset = $scope.offset + r.length;
+                    $scope.isListFull = r.wall.filter(function (m) { return m.date < startTS}).length > 0;
+
+                    const relevantMessages = r.wall.filter(function (m) { return m.date >= startTS && m.date <= endTS});
+
+                    if(relevantMessages.length === 0 && !$scope.isListFull) {
+                        return $scope.searchApi()
+                    } else {
+                        return relevantMessages;
+                    }
+                });
         };
 }]);
