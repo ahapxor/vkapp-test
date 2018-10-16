@@ -342,7 +342,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
     function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         const twoWeeks = new Date();
         twoWeeks.setDate(twoWeeks.getDate() - 14);
-        const picker = datepicker("#search-date", {
+        const picker = datepicker("#filter-date", {
             startDate: new Date(),
             dateSelected: new Date(),
             minDate: twoWeeks,
