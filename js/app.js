@@ -295,6 +295,7 @@ app.controller('app.baseListController', ['$scope', '$controller',
 app.controller('app.messageListController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
     function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $controller('app.baseListController', { $scope: $scope });
+        $scope.tab = 'tab1';
         $scope.searchApi = function() {
             return vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .getMessagesList($scope.messages.length, $scope.pageSize);
@@ -309,7 +310,7 @@ app.controller('app.messageListController', ['$scope', '$controller', '$routePar
 app.controller('app.onePostController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
     function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $controller('app.baseRepostController', { $scope: $scope });
-
+        $scope.tab = 'tab2';
         $scope.postLink = "";
         $scope.parsedId = "";
         $scope.message = {};
@@ -322,7 +323,7 @@ app.controller('app.onePostController', ['$scope', '$controller', '$routeParams'
 
         $scope.reloadMessage = function() {
             var id = parseId($scope.postLink);
-            if(id.length == 0) {
+            if(id.length === 0) {
                 return;
             }
             vkSevanServiceFactory(parseInt($routeParams.groupId))
@@ -339,6 +340,7 @@ app.controller('app.onePostController', ['$scope', '$controller', '$routeParams'
 app.controller('app.searchController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
     function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $controller('app.baseListController', { $scope: $scope });
+        $scope.tab = 'tab3';
 
         $scope.queryText = "";
 
@@ -360,6 +362,8 @@ app.controller('app.searchController', ['$scope', '$controller', '$routeParams',
 
 app.controller('app.searchByDateController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
     function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
+        $scope.tab = 'tab3';
+        
         const twoWeeks = new Date();
         twoWeeks.setDate(twoWeeks.getDate() - 14);
         const picker = datepicker("#filter-date", {

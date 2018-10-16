@@ -43,6 +43,9 @@
       .paddingTop20px {
           padding-top: 20px;
       }
+      .greenColor {
+          color: darkgreen;
+      }
   </style>
   <link rel="stylesheet" href="//unpkg.com/js-datepicker@3.3.3/datepicker.css">
 
@@ -51,10 +54,10 @@
 
 <body>
     <div ng-controller="app.groupSelectController">
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}">Список постов</a>
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/one-post">Репост по ссылке</a>
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search">Поиск по постам</a>
-        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search-by-date">Поиск по дате</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}" [ngClass]="{'greenColor': tab=='tab1'}">Список постов</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/one-post" [ngClass]="{'greenColor': tab=='tab2'}">Репост по ссылке</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search" [ngClass]="{'greenColor': tab=='tab3'}">Поиск по постам</a>
+        <a class="btn" ng-href="/vkapp-test/#/{{data.selectedOption.id}}/search-by-date" [ngClass]="{'greenColor': tab=='tab4'}">Поиск по дате</a>
 
         <select ng-model="data.selectedOption"
                 ng-options="option.name disable when option.disabled for option in data.availableOptions track by option.id"
