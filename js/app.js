@@ -348,7 +348,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
             minDate: twoWeeks,
             maxDate: new Date(),
             formatter: function(el, date, instance) {
-                el.value = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + new Date().getDate();
+                el.value = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             },
             onSelect: function(instance) {
                 $scope.dateFilter = instance.dateSelected.getTime();
