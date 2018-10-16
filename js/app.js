@@ -98,6 +98,26 @@ app.factory('vkSevanServiceFactory', function($q) {
                 return def.promise;
             },
 
+            getFullMessagesList: function (offset, count) {
+                console.log("service");
+                var def = $q.defer();
+
+                var query = {
+                    owner_id: this.fromGroupId,
+                    filter: "all",
+                    extended: 1,
+                    offset: offset,
+                    count: count
+                };
+                VK.api('wall.get', query,
+                    function (r) {
+                        var resp = r.response;
+                        def.resolve(resp);
+                    });
+
+                return def.promise;
+            },
+
             getSearchList: function (queryText, offset, count) {
                 console.log("service");
                 var def = $q.defer();
@@ -371,7 +391,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
             const endTS = startTS + 86400000;
 
             vkSevanServiceFactory(parseInt($routeParams.groupId))
-                .getMessagesList($scope.offset, $scope.pageSize)
+                .getFullMessagesList($scope.offset, $scope.pageSize)
                 .then(function (r) {
                     $scope.offset = $scope.offset + r.length;
                     $scope.isListFull = r.wall.filter(function (m) { return m.date * 1000 < startTS}).length > 0;
