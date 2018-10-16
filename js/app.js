@@ -378,10 +378,9 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
                     const relevantMessages = r.wall.filter(function (m) { return m.date * 1000 >= startTS && m.date * 1000 <= endTS});
 
                     if(relevantMessages.length === 0 && !$scope.isListFull) {
-                        return $scope.searchApi()
+                        $scope.searchApi()
                     } else {
-                        r.wall = [relevantMessages.length].concat(relevantMessages);
-                        return r;
+                        $scope.messages = $scope.messages.concat(relevantMessages);
                     }
                 });
         };
