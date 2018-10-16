@@ -393,7 +393,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
             vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .getFullMessagesList($scope.offset, $scope.pageSize)
                 .then(function (r) {
-                    $scope.offset = $scope.offset + r.length;
+                    $scope.offset = $scope.offset + r.wall.length;
                     $scope.isListFull = r.wall.filter(function (m) { return m.date * 1000 < startTS}).length > 0;
 
                     const relevantMessages = r.wall.filter(function (m) { return m.date * 1000 >= startTS && m.date * 1000 <= endTS});
