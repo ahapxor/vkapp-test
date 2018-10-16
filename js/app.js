@@ -380,7 +380,8 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
                     if(relevantMessages.length === 0 && !$scope.isListFull) {
                         return $scope.searchApi()
                     } else {
-                        return relevantMessages;
+                        r.wall = relevantMessages;
+                        return r;
                     }
                 });
         };
