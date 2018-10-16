@@ -354,6 +354,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
                 $scope.dateFilter = instance.dateSelected.getTime();
                 $scope.offset = 0;
                 $scope.isListFull = false;
+                $scope.messages = [];
                 $scope.getNextPage();
             }
         });
