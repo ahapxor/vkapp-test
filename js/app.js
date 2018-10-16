@@ -371,9 +371,9 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
                 .getMessagesList($scope.offset, $scope.pageSize)
                 .then(function (r) {
                     $scope.offset = $scope.offset + r.length;
-                    $scope.isListFull = r.wall.filter(function (m) { return m.date < startTS}).length > 0;
+                    $scope.isListFull = r.wall.filter(function (m) { return m.date * 1000 < startTS}).length > 0;
 
-                    const relevantMessages = r.wall.filter(function (m) { return m.date >= startTS && m.date <= endTS});
+                    const relevantMessages = r.wall.filter(function (m) { return m.date * 1000 >= startTS && m.date * 1000 <= endTS});
 
                     if(relevantMessages.length === 0 && !$scope.isListFull) {
                         return $scope.searchApi()
