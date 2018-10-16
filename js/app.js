@@ -352,6 +352,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
             },
             onSelect: function(instance) {
                 $scope.dateFilter = instance.dateSelected.getTime();
+                $scope.offset = 0;
                 $scope.getNextPage();
             }
         });
