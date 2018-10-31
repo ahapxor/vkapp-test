@@ -409,7 +409,9 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
                     const relevantMessages = r.wall.filter(function (m) { return m.date * 1000 >= startTS && m.date * 1000 <= endTS && !m.is_pinned});
 
                     if(relevantMessages.length === 0 && !$scope.isListFull) {
-                        $scope.searchApi()
+                        setTimeout(function() {
+                            $scope.searchApi();
+                        }, 334);
                     } else {
                         $scope.messages = $scope.messages.concat(relevantMessages);
                     }
