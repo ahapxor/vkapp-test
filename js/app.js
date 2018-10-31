@@ -14,7 +14,12 @@ var availableGroups = [
     {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'}
 ];
 
-var defaultGroup = availableGroups[0];
+function findGroupById(id) {
+    return availableGroups.find(function (i) { return i === id; });
+}
+
+var defaultGroupId = localStorage.getItem('cbGroupId');
+var defaultGroup = findGroupById(!!defaultGroupId ? defaultGroupId : '-145013503');
 
 var app = angular.module('app', ['ngRoute']);
 
@@ -199,6 +204,7 @@ app.controller('app.groupSelectController', ['$scope', '$location', function ($s
     };
 
     $scope.update = function(newValue) {
+        localStorage.setItem('cbGroupId', newValue.id);
         $location.path("/" + newValue.id)
     }
 }]);
