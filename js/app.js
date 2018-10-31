@@ -15,7 +15,7 @@ var availableGroups = [
 ];
 
 function findGroupById(id) {
-    return availableGroups.find(function (i) { return i === id; });
+    return availableGroups.find(function (i) { return i.id === id; });
 }
 
 var defaultGroupId = localStorage.getItem('cbGroupId');
