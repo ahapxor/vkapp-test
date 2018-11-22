@@ -320,7 +320,7 @@ app.controller('app.onePostController', ['$scope', '$controller', '$routeParams'
         $scope.postLink = "";
         $scope.parsedId = "";
         $scope.message = {};
-        var parseRegex = /wall(-[0-9]+_[0-9]+)/;
+        var parseRegex = /wall([-]?[0-9]+_[0-9]+)/;
 
         function parseId(link) {
             var matches = parseRegex.exec(link);
