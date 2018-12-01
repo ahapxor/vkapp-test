@@ -69,8 +69,28 @@ app.factory('vkSevanServiceFactory', function($q) {
             // '([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])'
         ].join('|');
 
-        function stripEmoji(message) {
-            return message.replace(new RegExp(ranges, 'g'), '');
+        function replaceEmoji(message) {
+            if(!message) {
+                return message;
+            } else {
+                var i = 0;
+                var result = "";
+                while(i < message.length) {
+                    var charCode = message.codePointAt(i);
+                    if(charCode > 0xFFFF) {
+                        var hiBytes = message.charCodeAt(i);
+                        var loBytes = message.charCodeAt(i + 1);
+                        var escapeSeq = '&x' + hiBytes.toString(16) + loBytes.toString(16) + ';';
+                        result = result + escapeSeq;
+                        i = i + 2;
+                    } else {
+                        result = result + message[i];
+                        i = i + 1;
+                    }
+                }
+
+                return result;
+            }
         }
 
 
@@ -174,7 +194,7 @@ app.factory('vkSevanServiceFactory', function($q) {
 
             postMessage: function (message, attachments) {
                 var def = $q.defer();
-                message = stripEmoji(message.replace(/<br>/g, "\n"));
+                message = replaceEmoji(message.replace(/<br>/g, "\n"));
                 var requestParams = {
                     owner_id: this.toGroupId,
                     from_group: 1,
