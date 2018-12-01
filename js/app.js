@@ -20,7 +20,8 @@ function findGroupById(id) {
 }
 
 var defaultGroupId = localStorage.getItem('cbGroupId');
-var defaultGroup = findGroupById(!!defaultGroupId ? defaultGroupId : '-145013503');
+var foundGroup = findGroupById(defaultGroupId);
+var defaultGroup = foundGroup ? foundGroup : findGroupById('-145013503');
 
 var app = angular.module('app', ['ngRoute']);
 
