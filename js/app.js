@@ -82,7 +82,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                 while(i < message.length) {
                     var charCode = message.codePointAt(i);
                     if(charCode > 0xFFFF) {
-                        var escapeSeq = '&x' + charCode + ';';
+                        var escapeSeq = '&#x' + charCode + ';';
                         result = result + escapeSeq;
                         i = i + 2;
                     } else {
