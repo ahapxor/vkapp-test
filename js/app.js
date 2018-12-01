@@ -82,9 +82,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                 while(i < message.length) {
                     var charCode = message.codePointAt(i);
                     if(charCode > 0xFFFF) {
-                        var hiBytes = message.charCodeAt(i);
-                        var loBytes = message.charCodeAt(i + 1);
-                        var escapeSeq = '&u' + hiBytes.toString(16) + loBytes.toString(16) + ';';
+                        var escapeSeq = '&x' + charCode + ';';
                         result = result + escapeSeq;
                         i = i + 2;
                     } else {
@@ -197,7 +195,7 @@ app.factory('vkSevanServiceFactory', function($q) {
 
             postMessage: function (message, attachments) {
                 var def = $q.defer();
-                message = stripEmoji(message.replace(/<br>/g, "\n"));
+                message = replaceEmoji(message.replace(/<br>/g, "\n"));
                 var requestParams = {
                     owner_id: this.toGroupId,
                     from_group: 1,
