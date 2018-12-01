@@ -80,7 +80,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     if(charCode > 0xFFFF) {
                         var hiBytes = message.charCodeAt(i);
                         var loBytes = message.charCodeAt(i + 1);
-                        var escapeSeq = '&x' + hiBytes.toString(16) + loBytes.toString(16) + ';';
+                        var escapeSeq = '&u' + hiBytes.toString(16) + loBytes.toString(16) + ';';
                         result = result + escapeSeq;
                         i = i + 2;
                     } else {
