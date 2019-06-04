@@ -11,7 +11,7 @@
                 <button ng-click="repostMessage(message)">Repost</button>
                 <div class="metaInfo"><a target="_blank" ng-href="https://vk.com/{{getOwner(message.from_id).link}}">
                     <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}</a></div>
-                <div class="metaInfo"><a target="_blank" ng-href="https://vk.com/{{getGroupName(message.to_id)}}?w=wall{{message.from_id}}-{{message.id}}">{{formatDate(message.date)}}</a></div>
+                <div class="metaInfo"><a target="_blank" ng-href="https://vk.com/{{getGroupName(message.to_id)}}?w=wall{{message.from_id}}_{{message.id}}">{{formatDate(message.date)}}</a></div>
                 <div class="paddingTop20px" ng-bind-html="renderHtml(message.text)"></div>
                 <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments" />
             </td>
