@@ -270,7 +270,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
 
         $scope.getOwner = function(fromId) {
             var profile = $scope.profiles.find(function(prof) {
-                return prof.uid === fromId;
+                return prof.id === fromId;
             });
             if(!!profile) {
                 var name = profile.first_name + " " + profile.last_name;
@@ -281,7 +281,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
                 };
             } else {
                 var group = $scope.groups.find(function(gr) {
-                    return gr.gid === -fromId;
+                    return gr.id === -fromId;
                 });
                 if(!!group) {
                     return {
