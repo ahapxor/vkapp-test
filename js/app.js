@@ -118,7 +118,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     offset: offset,
                     count: count
                 };
-                VK.api('wall.get', query,
+                VK.api('wall.get', query, {v: '5.0'},
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -138,7 +138,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     offset: offset,
                     count: count
                 };
-                VK.api('wall.get', query,
+                VK.api('wall.get', query, {v: '5.0'},
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -158,7 +158,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     offset: offset,
                     count: count
                 };
-                VK.api('wall.search', query,
+                VK.api('wall.search', query, {v: '5.0'},
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -175,7 +175,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     posts: id,
                     extended: 1
                 };
-                VK.api('wall.getById', query,
+                VK.api('wall.getById', query, {v: '5.0'},
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -207,7 +207,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     requestParams.attachments = this.getAttachmentsInString(attachments);
                 }
 
-                VK.api('wall.post', requestParams,
+                VK.api('wall.post', requestParams, {v: '5.0'},
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
