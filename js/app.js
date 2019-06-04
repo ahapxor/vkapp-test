@@ -193,7 +193,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     .map(function (attach) {
                         var attachType = attach.type;
                         var attachment = attach[attachType];
-                        return attachType + attachment.owner_id + "_" + (!!attachment.pid ? attachment.pid : attachment.vid)
+                        return attachType + attachment.owner_id + "_" + attachment.id;
                     }).join();
             },
 
@@ -250,9 +250,9 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
 
         $scope.getAttachPreview = function (attach) {
             if(!!attach.photo) {
-                return attach.photo.src_small;
+                return attach.photo.photo_130;
             } else if(!!attach.video) {
-                return attach.video.image_small;
+                return attach.video.photo_130;
             } else {
                 return null;
             }
@@ -286,7 +286,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
                 if(!!group) {
                     return {
                         name: group.name,
-                        photo: group.photo,
+                        photo: group.photo_100,
                         link: group.screen_name
                     };
                 } else {
