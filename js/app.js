@@ -265,7 +265,19 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
         };
 
         $scope.formatDate = function(date) {
-            return new Date(date * 1000).toDateString();
+            return new Date(date * 1000).toUTCString();
+        };
+
+        $scope.getGroupName = function(groupId) {
+            var group = $scope.groups.find(function(gr) {
+                return gr.id === Math.abs(groupId);
+            });
+
+            if(group) {
+                return group.screen_name;
+            } else {
+                return "";
+            }
         };
 
         $scope.getOwner = function(fromId) {
@@ -443,6 +455,7 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
                         }, 334);
                     } else {
                         $scope.messages = $scope.messages.concat(relevantMessages);
+                        $scope.groups = $scope.groups.concat(r.groups);
                     }
                 });
         };
