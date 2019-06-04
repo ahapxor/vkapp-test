@@ -203,7 +203,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                 var requestParams = {
                     owner_id: this.toGroupId,
                     from_group: 1,
-                    signed: 1,
+                    signed: 0,
                     message: message,
                     v: '5.0'
                 };
@@ -265,7 +265,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
         };
 
         $scope.formatDate = function(date) {
-            return new Date(date * 1000).toString();
+            return new Date(date * 1000).toDateString();
         };
 
         $scope.getOwner = function(fromId) {
