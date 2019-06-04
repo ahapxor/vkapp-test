@@ -318,8 +318,8 @@ app.controller('app.baseListController', ['$scope', '$controller',
                 .then(function (resp) {
                     $scope.groups = $scope.groups.concat(resp.groups);
                     $scope.profiles = $scope.profiles.concat(resp.profiles);
-                    var wall = resp.wall;
-                    var count = wall.shift();
+                    var wall = resp.items;
+                    var count = wall.length;
                     $scope.messages = $scope.messages.concat(wall);
                     $scope.isListFull = $scope.messages.length >= count;
                 });
@@ -364,7 +364,7 @@ app.controller('app.onePostController', ['$scope', '$controller', '$routeParams'
             vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .getMessagesById(id)
                 .then(function (resp) {
-                    $scope.message = resp.wall.length > 0 ? resp.wall[0] : {};
+                    $scope.message = resp.items.length > 0 ? resp.items[0] : {};
                     $scope.groups = resp.groups;
                     $scope.profiles = resp.profiles;
 
@@ -432,10 +432,10 @@ app.controller('app.searchByDateController', ['$scope', '$controller', '$routePa
             vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .getFullMessagesList($scope.offset, $scope.pageSize)
                 .then(function (r) {
-                    $scope.offset = $scope.offset + (r.wall.length ? r.wall.length - 1 : r.wall.length);
-                    $scope.isListFull = r.wall.filter(function (m) { return m.date * 1000 < startTS && !m.is_pinned}).length > 0;
+                    $scope.offset = $scope.offset + r.items.length;
+                    $scope.isListFull = r.items.filter(function (m) { return m.date * 1000 < startTS && !m.is_pinned}).length > 0;
 
-                    const relevantMessages = r.wall.filter(function (m) { return m.date * 1000 >= startTS && m.date * 1000 <= endTS && !m.is_pinned});
+                    const relevantMessages = r.items.filter(function (m) { return m.date * 1000 >= startTS && m.date * 1000 <= endTS && !m.is_pinned});
 
                     if(relevantMessages.length === 0 && !$scope.isListFull) {
                         setTimeout(function() {
