@@ -116,9 +116,10 @@ app.factory('vkSevanServiceFactory', function($q) {
                     filter: "others",
                     extended: 1,
                     offset: offset,
-                    count: count
+                    count: count,
+                    v: '5.0'
                 };
-                VK.api('wall.get', query, {v: '5.0'},
+                VK.api('wall.get', query,
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -136,9 +137,10 @@ app.factory('vkSevanServiceFactory', function($q) {
                     filter: "all",
                     extended: 1,
                     offset: offset,
-                    count: count
+                    count: count,
+                    v: '5.0'
                 };
-                VK.api('wall.get', query, {v: '5.0'},
+                VK.api('wall.get', query,
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -156,9 +158,10 @@ app.factory('vkSevanServiceFactory', function($q) {
                     query: queryText,
                     extended: 1,
                     offset: offset,
-                    count: count
+                    count: count,
+                    v: '5.0'
                 };
-                VK.api('wall.search', query, {v: '5.0'},
+                VK.api('wall.search', query,
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -173,9 +176,10 @@ app.factory('vkSevanServiceFactory', function($q) {
 
                 var query = {
                     posts: id,
-                    extended: 1
+                    extended: 1,
+                    v: '5.0'
                 };
-                VK.api('wall.getById', query, {v: '5.0'},
+                VK.api('wall.getById', query,
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
@@ -200,14 +204,15 @@ app.factory('vkSevanServiceFactory', function($q) {
                     owner_id: this.toGroupId,
                     from_group: 1,
                     signed: 1,
-                    message: message
+                    message: message,
+                    v: '5.0'
                 };
 
                 if (!!attachments) {
                     requestParams.attachments = this.getAttachmentsInString(attachments);
                 }
 
-                VK.api('wall.post', requestParams, {v: '5.0'},
+                VK.api('wall.post', requestParams,
                     function (r) {
                         var resp = r.response;
                         def.resolve(resp);
