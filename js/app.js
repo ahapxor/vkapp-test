@@ -219,6 +219,23 @@ app.factory('vkSevanServiceFactory', function($q) {
                     });
 
                 return def.promise;
+            },
+
+            removeMessage: function (message) {
+                var def = $q.defer();
+                var requestParams = {
+                    owner_id: this.toGroupId,
+                    post_id: message.id,
+                    v: '5.0'
+                };
+
+                VK.api('wall.delete', requestParams,
+                    function (r) {
+                        var resp = r.response;
+                        def.resolve(resp);
+                    });
+
+                return def.promise;
             }
         };
         vk.init();
