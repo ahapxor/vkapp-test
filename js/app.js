@@ -250,7 +250,8 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
                 .postMessage(message.text, message.attachments)
         };
 
-        var getRemoveClass = function(id) {
+        $scope.getRemoveClass = function(message) {
+            var id = message.id;
             var cls = $scope.removeClass['id' + id];
             if (!cls) {
                 return 'far fa-window-close';
@@ -264,7 +265,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
         };
 
         $scope.removeMessage = function (message) {
-            var cls = getRemoveClass(message.id);
+            var cls = $scope.getRemoveClass(message.id);
             if(cls === 'fas fa-window-close') {
                 setRemoveClass(message.id, 'fas fa-window-close');
             } else if(cls === 'far fa-window-close') {
