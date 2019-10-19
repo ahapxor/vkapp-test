@@ -242,8 +242,20 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
     function ($scope, $sce, $routeParams, vkSevanServiceFactory) {
         $scope.groups = [];
         $scope.profiles = [];
+        $scope.removeClass = ['far', 'fa-window-close'];
+        $scope.removeClassId = 1;
 
         $scope.repostMessage = function (message) {
+            if($scope.removeClassId === 1) {
+                $scope.removeClass = ['fas', 'fa-window-close'];
+                $scope.removeClassId = 2;
+            } else if($scope.removeClassId === 2) {
+                $scope.removeClass = ['displaynone'];
+                $scope.removeClassId = 3;
+            }
+        };
+
+        $scope.removeMessage = function (message) {
             vkSevanServiceFactory(parseInt($routeParams.groupId))
                 .postMessage(message.text, message.attachments)
         };
