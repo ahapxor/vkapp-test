@@ -246,6 +246,10 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
         $scope.removeClassId = 1;
 
         $scope.repostMessage = function (message) {
+            vkSevanServiceFactory(parseInt($routeParams.groupId))
+                .postMessage(message.text, message.attachments)
+        };
+        $scope.removeMessage = function (message) {
             if($scope.removeClassId === 1) {
                 $scope.removeClass = ['fas', 'fa-window-close'];
                 $scope.removeClassId = 2;
@@ -253,11 +257,6 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
                 $scope.removeClass = ['displaynone'];
                 $scope.removeClassId = 3;
             }
-        };
-
-        $scope.removeMessage = function (message) {
-            vkSevanServiceFactory(parseInt($routeParams.groupId))
-                .postMessage(message.text, message.attachments)
         };
 
         $scope.getAttachPreview = function (attach) {
