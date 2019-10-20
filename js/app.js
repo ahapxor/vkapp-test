@@ -12,8 +12,8 @@ var availableGroups = [
     {id: '-57873454', name: 'Мини-приют СевХвостики помощь бездомным животным'},
     {id: '-144439165', name: 'ПОДАРИ СОБАКЕ ДОМ'},
     {id: '-162207796', name: 'КотоПриют "Шанс", Севастополь'},
-    {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'},
-    {id: '-125683505', name: 'test app'}
+    {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'}//,
+    // {id: '-125683505', name: 'test app'}
 ];
 
 function findGroupById(id) {
@@ -227,7 +227,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                 var requestParams = {
                     owner_id: this.toGroupId,
                     post_id: message.id,
-                    v: '5.0'
+                    v: '5.102'
                 };
 
                 VK.api('wall.delete', requestParams,
