@@ -283,7 +283,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
         };
 
         $scope.removeMessage = function (message) {
-            var cls = $scope.getRemoveClass(message.id);
+            var cls = $scope.getRemoveClass(message);
             if(cls === 'far fa-window-close') {
                 setRemoveClass(message.id, 'fas fa-window-close');
             } else if(cls === 'fas fa-window-close') {
