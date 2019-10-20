@@ -287,7 +287,17 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
             if(cls === 'far fa-window-close') {
                 setRemoveClass(message.id, 'fas fa-window-close');
             } else if(cls === 'fas fa-window-close') {
-                setRemoveClass(message.id, 'displaynone');
+                vkSevanServiceFactory(parseInt($routeParams.groupId))
+                    .removeMessage(message)
+                    .then(
+                        function(result){
+                            console.log(message.id + " post was removed");
+                            setRemoveClass(message.id, 'displaynone');
+                        },function(error) {
+                            console.error("error when removing post " + message.id);
+                            // setRemoveClass(message.id, 'displaynone');
+                        })
+
             }
         };
 
