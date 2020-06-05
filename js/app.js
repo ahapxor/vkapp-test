@@ -303,13 +303,20 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
 
         $scope.getAttachPreview = function (attach) {
             if(!!attach.photo) {
-                return attach.photo.photo_130;
+                return attach.photo.sizes.find(function(size) {
+                    return size.height === 130;
+                }).map(function(size) {
+                    return size.url;
+                });
             } else if(!!attach.video) {
-                return attach.video.photo_130;
+                return attach.video.sizes.find(function(size) {
+                    return size.height === 130;
+                }).map(function(size) {
+                    return size.url;
+                });
             } else {
                 return null;
             }
-
         };
 
         $scope.renderHtml = function(html_code)
@@ -341,7 +348,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
                 var name = profile.first_name + " " + profile.last_name;
                 return {
                     name: name,
-                    photo: profile.photo_medium_rec,
+                    photo: profile.photo_50,
                     link: profile.screen_name
                 };
             } else {
