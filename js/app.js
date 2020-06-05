@@ -309,11 +309,7 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
                     return size.url;
                 });
             } else if(!!attach.video) {
-                return attach.video.sizes.find(function(size) {
-                    return size.height === 130;
-                }).map(function(size) {
-                    return size.url;
-                });
+                return attach.video.photo_130;
             } else {
                 return null;
             }
