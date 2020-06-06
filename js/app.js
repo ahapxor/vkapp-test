@@ -302,12 +302,9 @@ app.controller('app.baseRepostController', ['$scope', '$sce', '$routeParams', 'v
         };
 
         $scope.getAttachPreview = function (attach) {
-            if(!!attach.photo) {
-                return attach.photo.sizes.find(function(size) {
-                    return size.height === 130;
-                }).map(function(size) {
-                    return size.url;
-                });
+            if(!!attach.photo && attach.photo.sizes.length > 0) {
+                var size = attach.photo.sizes[0];
+                return size.url;
             } else if(!!attach.video) {
                 return attach.video.photo_130;
             } else {
