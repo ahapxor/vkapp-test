@@ -118,7 +118,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     extended: 1,
                     offset: offset,
                     count: count,
-                    v: '5.81'
+                    v: '5.131'
                 };
                 VK.api('wall.get', query,
                     function (r) {
@@ -139,7 +139,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     extended: 1,
                     offset: offset,
                     count: count,
-                    v: '5.81'
+                    v: '5.131'
                 };
                 VK.api('wall.get', query,
                     function (r) {
@@ -160,7 +160,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     extended: 1,
                     offset: offset,
                     count: count,
-                    v: '5.81'
+                    v: '5.131'
                 };
                 VK.api('wall.search', query,
                     function (r) {
@@ -178,7 +178,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                 var query = {
                     posts: id,
                     extended: 1,
-                    v: '5.81'
+                    v: '5.131'
                 };
                 VK.api('wall.getById', query,
                     function (r) {
@@ -206,7 +206,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                     from_group: 1,
                     signed: 0,
                     message: message,
-                    v: '5.81'
+                    v: '5.131'
                 };
 
                 if (!!attachments) {
