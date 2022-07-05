@@ -12,8 +12,8 @@ var availableGroups = [
     {id: '-57873454', name: 'Мини-приют СевХвостики помощь бездомным животным'},
     {id: '-144439165', name: 'ПОДАРИ СОБАКЕ ДОМ'},
     {id: '-162207796', name: 'КотоПриют "Шанс", Севастополь'},
-    {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'}//,
-    // {id: '-125683505', name: 'test app'}
+    {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'},
+    {id: '-125683505', name: 'test app'}
 ];
 
 function findGroupById(id) {
@@ -466,7 +466,7 @@ app.controller('app.searchController', ['$scope', '$controller', '$routeParams',
 app.controller('app.searchByDateController', ['$scope', '$controller', '$routeParams', 'vkSevanServiceFactory',
     function ($scope, $controller, $routeParams, vkSevanServiceFactory) {
         $scope.tab = 'tab3';
-        
+
         const twoWeeks = new Date();
         twoWeeks.setDate(twoWeeks.getDate() - 14);
         const picker = datepicker("#filter-date", {
