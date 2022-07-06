@@ -13,7 +13,7 @@ var availableGroups = [
     {id: '-144439165', name: 'ПОДАРИ СОБАКЕ ДОМ'},
     {id: '-162207796', name: 'КотоПриют "Шанс", Севастополь'},
     {id: '-18923086', name: 'Благотворительный фонд помощи бездомным животным'},
-    {id: '-125683505', name: 'test app'}
+    // {id: '-125683505', name: 'test app'}
 ];
 
 function findGroupById(id) {
@@ -227,7 +227,7 @@ app.factory('vkSevanServiceFactory', function($q) {
                 var requestParams = {
                     owner_id: this.toGroupId,
                     post_id: message.id,
-                    v: '5.102'
+                    v: '5.131'
                 };
                 VK.callMethod("showSettingsBox", 8192);
                 VK.api('wall.delete', requestParams,
